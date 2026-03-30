@@ -96,8 +96,27 @@ button,
     max-width: 300px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-}.order-button {
+.cart-link {
+    background-color: white;
+    color: #b30000 !important;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.cart-list button {
+    background-color: #8e0000;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 10px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.order-button {
     display: inline-block;
     background-color: #c62828;
     color: white;

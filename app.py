@@ -3,13 +3,17 @@ from flask import Flask, render_template, request, redirect, url_for, session
 app = Flask(__name__)
 app.secret_key = "pizza_secret_key"
 
+def get_cart_count():
+    cart = session.get("cart", [])
+    return len(cart)
+
 @app.route("/")
 def home():
-    return render_template("home.html")
+    return render_template("home.html", cart_count=get_cart_count())
 
 @app.route("/menu")
 def menu():
-    return render_template("menu.html")
+    return render_template("menu.html", cart_count=get_cart_count())
 
 @app.route("/add_to_cart", methods=["POST"])
 def add_to_cart():
@@ -34,7 +38,22 @@ def add_to_cart():
 def cart():
     cart_items = session.get("cart", [])
     total = sum(item["price"] for item in cart_items)
-    return render_template("cart.html", cart_items=cart_items, total=total)
+    return render_template(
+        "cart.html",
+        cart_items=cart_items,
+        total=total,
+        cart_count=get_cart_count()
+    )
+    
+@app.route("/remove_from_cart/<int:item_index>", methods=["POST"])
+def remove_from_cart(item_index):
+    cart = session.get("cart", [])
+
+    if 0 <= item_index < len(cart):
+        cart.pop(item_index)
+        session["cart"] = cart
+
+    return redirect(url_for("cart"))
 
 @app.route("/order", methods=["GET", "POST"])
 def order():
@@ -53,11 +72,11 @@ def order():
         <p>Delivery Address: {address}</p>
         """
 
-    return render_template("order.html")
+    return render_template("order.html", cart_count=get_cart_count())
 
 @app.route("/orders")
 def orders():
-    return render_template("orders.html")
+    return render_template("orders.html", cart_count=get_cart_count())
 
 if __name__ == "__main__":
     app.run(debug=True)
