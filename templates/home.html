@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Operation Pizzeria </title>
-    <link rel="stylesheet" href="../static/style.css">
+    <title>Operation Pizzeria</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <header>
-        <h1>Operation Pizzeria </h1>
+        <h1>Operation Pizzeria</h1>
         <p>Fresh pizza made fast</p>
     </header>
 
     <nav>
-        <a href="home.html">Home</a>
-        <a href="menu.html">Menu</a>
-        <a href="/cart" class="cart-link">🛒 Cart ({{ cart_count }})</a>
-        <a href="order.html">Order</a>
-        <a href="orders.html">Orders</a>
+        <a href="/">Home</a>
+        <a href="/menu">Menu</a>
+        <a href="/cart" class="cart-link">🛒 Cart</a>
+        <a href="/order">Order</a>
+        <a href="/orders">Orders</a>
     </nav>
 
     <main class="hero">
-        <h2>Welcome to Operation Pizzeria </h2>
+        <h2>Welcome to Operation Pizzeria</h2>
         <p>Order your favorite pizza online.</p>
-        <button>Order Now</button>
+        <a href="/menu" class="order-button">Order Now</a>
     </main>
 </body>
 </html>
