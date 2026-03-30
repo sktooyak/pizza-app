@@ -27,13 +27,88 @@ nav a {
 
 .hero {
     text-align: center;
-    padding: 50px 20px;
+    padding: 40px 20px;
 }
 
-button {
+.menu-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px;
+    flex-wrap: wrap;
+}
+
+.pizza-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    width: 240px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pizza-card h3 {
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+.description {
+    min-height: 50px;
+    margin: 0 0 14px 0;
+}
+
+.price {
+    font-weight: bold;
+    margin: 0 0 16px 0;
+}
+
+.pizza-card form {
+    margin: 0;
+}
+
+button,
+.cart-button {
     background-color: #c62828;
     color: white;
-    padding: 10px 20px;
     border: none;
     border-radius: 8px;
+    padding: 10px 16px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.cart-container {
+    text-align: center;
+    padding: 30px;
+}
+
+.cart-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.cart-list li {
+    background-color: white;
+    margin: 10px auto;
+    padding: 12px;
+    max-width: 300px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+}.order-button {
+    display: inline-block;
+    background-color: #c62828;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+.order-button:hover {
+    background-color: #8e0000;
 }
