@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Operation Pizzeria</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="logo">Operation Pizzeria</div>
+
+        <nav class="main-nav">
+            <a href="/">Home</a>
+            <a href="/menu">Menu</a>
+            <a href="/order">Checkout</a>
+            <a href="/orders">Orders</a>
+            <a href="/contact">Contact Us</a>
+        </nav>
+
+        <a href="/cart" class="cart-button">🛒 Cart ({{ cart_count }})</a>
+    </header>
+
+    <main class="hero">
+        <h2>Contact Operation Pizzeria</h2>
+        <p>We would love to hear from you.</p>
+    </main>
+
+    <section class="contact-info">
+        <p><strong>📍 Address:</strong> 123 Pizza Lane, Phoenix, AZ</p>
+        <p><strong>📞 Phone:</strong> (602) 555-1234</p>
+        <p><strong>📧 Email:</strong> contact@operationpizzeria.com</p>
+        <p><strong>🕒 Hours:</strong> 11 AM – 10 PM Daily</p>
+    </section>
+
+</body>
+</html>
