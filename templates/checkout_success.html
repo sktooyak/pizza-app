@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed - Operation Pizzeria</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="logo">Operation Pizzeria</div>
+
+        <nav class="main-nav">
+            <a href="/">Home</a>
+            <a href="/menu">Menu</a>
+            <a href="/order">Checkout</a>
+            <a href="/orders">Orders</a>
+            <a href="/contact">Contact Us</a>
+        </nav>
+
+        <a href="/cart" class="cart-button">🛒 Cart ({{ cart_count }})</a>
+    </header>
+
+    <main class="hero">
+        <h2>Order Confirmed</h2>
+        <p>Thank you for your order, {{ customer_name }}.</p>
+    </main>
+
+    <section class="contact-box">
+        <p><strong>Phone:</strong> {{ phone }}</p>
+        <p><strong>Address:</strong> {{ address }}</p>
+        <p><strong>Payment Method:</strong> {{ payment_method }}</p>
+        <p><strong>Total Paid:</strong> ${{ total }}</p>
+        <p>Your order has been submitted successfully.</p>
+    </section>
+
+</body>
+</html>
