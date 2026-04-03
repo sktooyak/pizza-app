@@ -1,43 +1,132 @@
+/* ============================================================
+   BASE STYLES
+   Global resets and default styles applied to the whole page
+   ============================================================ */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    background-color: #fff8f0;
+    background-color: #f5efe8;
     color: #333;
 }
 
-header {
-    background-color: #c62828;
-    color: white;
-    text-align: center;
-    padding: 20px;
+/* ============================================================
+   HEADER & NAVIGATION
+   Top bar with logo, nav links, and cart button
+   ============================================================ */
+.top-header {
+    background-color: #1f1f1f;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 30px;
 }
 
-nav {
-    background-color: #8e0000;
-    text-align: center;
-    padding: 10px;
-}
-
-nav a {
+.logo {
     color: white;
-    text-decoration: none;
-    margin: 0 15px;
+    font-size: 28px;
     font-weight: bold;
 }
 
-.hero {
-    text-align: center;
-    padding: 40px 20px;
+/* Navigation links sit flush next to each other (gap: 0) */
+.main-nav {
+    display: flex;
+    gap: 0;
 }
 
+.main-nav a {
+    background-color: #a80000; /* Deep red nav buttons */
+    color: white;
+    text-decoration: none;
+    padding: 12px 28px;
+    font-weight: bold;
+}
+
+.main-nav a:hover {
+    background-color: #c62828; /* Lighter red on hover */
+}
+
+.cart-button {
+    background-color: #d62828; /* Bright red, distinct from nav links */
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+/* ============================================================
+   HERO SECTION
+   Large introductory/banner area at the top of the page
+   ============================================================ */
+.hero {
+    text-align: center;
+    padding: 60px 20px 30px;
+}
+
+/* ============================================================
+   CONTENT SECTIONS
+   Mission statement and contact paragraph blocks
+   ============================================================ */
+.mission-section {
+    text-align: center;
+    max-width: 900px;
+    margin: 40px auto 20px;
+    padding: 20px;
+    line-height: 1.8;
+}
+
+.mission-section h2 {
+    color: #a80000;
+    margin-bottom: 15px;
+}
+
+.mission-section p {
+    font-size: 1.05rem;
+}
+
+/* Contact paragraph mirrors mission-section layout */
+.contact-paragraph {
+    text-align: center;
+    padding: 40px 20px 60px;
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+.contact-paragraph h2 {
+    margin-bottom: 15px;
+    color: #a80000;
+}
+
+.contact-paragraph p {
+    font-size: 1.05rem;
+}
+
+/* ============================================================
+   MENU SECTION
+   Section title and grid of pizza cards
+   ============================================================ */
+ 
+/* Section heading aligned with the card grid */
+.menu-section-title {
+    max-width: 1200px;
+    margin: 35px auto 10px;
+    padding-left: 20px;
+    color: #a80000;
+    font-size: 1.8rem;
+}
+
+ 
+/* Flex container that wraps cards on smaller screens */
 .menu-container {
     display: flex;
     justify-content: center;
     gap: 20px;
-    padding: 30px;
+    padding: 20px 30px 40px;
     flex-wrap: wrap;
 }
 
+/* Individual pizza item card */
 .pizza-card {
     background-color: white;
     border-radius: 10px;
@@ -52,6 +141,7 @@ nav a {
     margin-bottom: 16px;
 }
 
+/* Min-height keeps cards uniform even with short descriptions */
 .description {
     min-height: 50px;
     margin: 0 0 14px 0;
@@ -66,68 +156,61 @@ nav a {
     margin: 0;
 }
 
-button,
-.cart-button {
+/* "Add to cart" button inside each card */
+.pizza-card button {
     background-color: #c62828;
     color: white;
     border: none;
     border-radius: 8px;
     padding: 10px 16px;
     cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    margin-top: 10px;
+    font-weight: bold;
 }
 
-.cart-container {
+/* ============================================================
+   CHECKOUT PAGE
+   Two-column layout: order summary + customer details form
+   ============================================================ */
+.contact-info {
     text-align: center;
-    padding: 30px;
+    max-width: 600px;
+    margin: 40px auto;
+    line-height: 2;
+}
+.checkout-container {
+    max-width: 1000px;
+    margin: 30px auto 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Equal-width columns */
+    gap: 30px;
+    padding: 0 20px;
 }
 
-.cart-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-.cart-list li {
+/* Shared card style for both summary and form panels */
+.checkout-summary,
+.checkout-form {
     background-color: white;
-    margin: 10px auto;
-    padding: 12px;
-    max-width: 300px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
 }
 
-.cart-link {
-    background-color: white;
-    color: #b30000 !important;
-    padding: 8px 14px;
-    border-radius: 8px;
+/* Form labels stacked above their inputs */
+.checkout-form label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 6px;
     font-weight: bold;
 }
 
-.cart-list button {
-    background-color: #8e0000;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    padding: 6px 10px;
-    margin-left: 10px;
-    cursor: pointer;
-}
-
-.order-button {
-    display: inline-block;
-    background-color: #c62828;
-    color: white;
-    padding: 12px 24px;
+/* Consistent styling across all form input types */
+.checkout-form input,
+.checkout-form textarea,
+.checkout-form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
     border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    margin-top: 20px;
-    transition: 0.3s;
-}
-
-.order-button:hover {
-    background-color: #8e0000;
+    box-sizing: border-box; /* Prevents inputs from overflowing their container */
+    margin-bottom: 12px;
 }
