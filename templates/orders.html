@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders - Operation Pizzeria</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="logo">Operation Pizzeria</div>
+
+        <nav class="main-nav">
+            <a href="/">Home</a>
+            <a href="/menu">Menu</a>
+            <a href="/order">Checkout</a>
+            <a href="/orders">Orders</a>
+            <a href="/contact">Contact Us</a>
+        </nav>
+
+        <a href="/cart" class="cart-button">🛒 Cart ({{ cart_count }})</a>
+    </header>
+
+    <main class="hero">
+        <h2>Orders</h2>
+        <p>Submitted customer orders</p>
+    </main>
+
+    <section class="cart-container">
+        {% if orders %}
+            <ul class="cart-list">
+                {% for order in orders %}
+                    <li>
+                        <span>
+                            <strong>{{ order.customer_name }}</strong> —
+                            {{ order.pizza_size }} {{ order.pizza_type }},
+                            Qty: {{ order.quantity }},
+                            {{ order.address }}
+                        </span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No orders have been submitted yet.</p>
+        {% endif %}
+    </section>
+
+</body>
+</html>
