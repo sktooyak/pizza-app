@@ -214,3 +214,19 @@ body {
     box-sizing: border-box; /* Prevents inputs from overflowing their container */
     margin-bottom: 12px;
 }
+/* ============================================================
+   CART PAGE
+   Centered cart layout with item list and total
+   ============================================================ */
+
+.cart-container {
+    text-align: center;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.cart-list {
+    list-style: none;
+    padding: 0;
+}
