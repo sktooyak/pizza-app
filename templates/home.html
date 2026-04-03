@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Operation Pizzeria</title>
+    <title>Menu</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -18,31 +18,88 @@
         <a href="/contact">Contact Us</a>
     </nav>
 
-   <a href="/cart" class="cart-button">🛒 Cart ({{ cart_count }})</a>
+    <a href="/cart" class="cart-button">🛒 Cart ({{ cart_count }})</a>
 </header>
 
     <main class="hero">
-        <h2>Welcome to Operation Pizzeria</h2>
-        <p>Order your favorite pizza online.</p>
-        <a href="/menu" class="order-button">Order Now</a>
+        <h2>Pizza Menu</h2>
+        <p>Choose your favorite pizza.</p>
     </main>
-    <section class="mission-section">
-    <h2>Our Mission</h2>
-    <p>
-        At <strong>Operation Pizzeria</strong>, our mission is to bring families and friends together
-        through fresh, delicious pizza made with quality ingredients and served with care.
-        We are committed to creating a welcoming experience, fast service, and flavors
-        that keep our community coming back for more.
-    </p>
-</section>
-   <section class="contact-paragraph">
-    <h2>Contact Operation Pizzeria</h2>
-    <p>
-        <p><strong>📍 Address:</strong> 123 Pizza Lane, Phoenix, AZ</p>
-        <p><strong>📞 Phone:</strong> (602) 555-1234</p>
-        <p><strong>📧 Email:</strong> contact@operationpizzeria.com</p>
-        <p><strong>🕒 Hours:</strong> 11 AM – 10 PM Daily</p>
-    </p>
 
+    <h2 class="menu-section-title">Pizzas</h2>
+<section class="menu-container">
+    {% for item in items %}
+        {% if item.category == "Pizza" %}
+        <div class="pizza-card">
+            <h3>{{ item.name }}</h3>
+            <p class="description">{{ item.description }}</p>
+            <p class="price">${{ item.price }}</p>
+
+            <form action="/add_to_cart" method="POST">
+                <input type="hidden" name="pizza_name" value="{{ item.name }}">
+                <input type="hidden" name="price" value="{{ item.price }}">
+                <button type="submit">Add to Cart</button>
+            </form>
+        </div>
+        {% endif %}
+    {% endfor %}
+</section>
+
+<h2 class="menu-section-title">Sides</h2>
+<section class="menu-container">
+    {% for item in items %}
+        {% if item.category == "Sides" %}
+        <div class="pizza-card">
+            <h3>{{ item.name }}</h3>
+            <p class="description">{{ item.description }}</p>
+            <p class="price">${{ item.price }}</p>
+
+            <form action="/add_to_cart" method="POST">
+                <input type="hidden" name="pizza_name" value="{{ item.name }}">
+                <input type="hidden" name="price" value="{{ item.price }}">
+                <button type="submit">Add to Cart</button>
+            </form>
+        </div>
+        {% endif %}
+    {% endfor %}
+</section>
+
+<h2 class="menu-section-title">Drinks</h2>
+<section class="menu-container">
+    {% for item in items %}
+        {% if item.category == "Drinks" %}
+        <div class="pizza-card">
+            <h3>{{ item.name }}</h3>
+            <p class="description">{{ item.description }}</p>
+            <p class="price">${{ item.price }}</p>
+
+            <form action="/add_to_cart" method="POST">
+                <input type="hidden" name="pizza_name" value="{{ item.name }}">
+                <input type="hidden" name="price" value="{{ item.price }}">
+                <button type="submit">Add to Cart</button>
+            </form>
+        </div>
+        {% endif %}
+    {% endfor %}
+</section>
+
+<h2 class="menu-section-title">Desserts</h2>
+<section class="menu-container">
+    {% for item in items %}
+        {% if item.category == "Dessert" %}
+        <div class="pizza-card">
+            <h3>{{ item.name }}</h3>
+            <p class="description">{{ item.description }}</p>
+            <p class="price">${{ item.price }}</p>
+
+            <form action="/add_to_cart" method="POST">
+                <input type="hidden" name="pizza_name" value="{{ item.name }}">
+                <input type="hidden" name="price" value="{{ item.price }}">
+                <button type="submit">Add to Cart</button>
+            </form>
+        </div>
+        {% endif %}
+    {% endfor %}
+</section>
 </body>
 </html>
