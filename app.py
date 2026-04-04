@@ -23,6 +23,18 @@ def init_db():
         price REAL NOT NULL
     )
     """)
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS orders (
+        order_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        customer_name TEXT NOT NULL,
+        phone TEXT NOT NULL,
+        pizza_type TEXT NOT NULL,
+        pizza_size TEXT NOT NULL,
+        quantity INTEGER NOT NULL,
+        address TEXT NOT NULL,
+        payment_method TEXT NOT NULL
+    )
+    """)
 
     conn.commit()
     conn.close()
@@ -54,6 +66,39 @@ def seed_data():
         INSERT INTO menu_items (name, description, category, price)
         VALUES (?, ?, ?, ?)
         """, ("Veggie Pizza", "Loaded with fresh vegetables", "Pizza", 11.99))
+        
+         # Sides
+        cursor.execute("""
+        INSERT INTO menu_items (name, description, category, price)
+        VALUES (?, ?, ?, ?)
+        """, ("Wings", "Crispy buffalo wings", "Sides", 6.99))
+
+        cursor.execute("""
+        INSERT INTO menu_items (name, description, category, price)
+        VALUES (?, ?, ?, ?)
+        """, ("Breadsticks", "Warm breadsticks with dipping sauce", "Sides", 5.49))
+
+        # Drinks
+        cursor.execute("""
+        INSERT INTO menu_items (name, description, category, price)
+        VALUES (?, ?, ?, ?)
+        """, ("Pepsi", "20 oz cold Pepsi", "Drinks", 2.49))
+
+        cursor.execute("""
+        INSERT INTO menu_items (name, description, category, price)
+        VALUES (?, ?, ?, ?)
+        """, ("Lemonade", "Fresh lemonade", "Drinks", 2.99))
+
+        # Desserts
+        cursor.execute("""
+        INSERT INTO menu_items (name, description, category, price)
+        VALUES (?, ?, ?, ?)
+        """, ("Brownie", "Warm chocolate brownie", "Dessert", 3.99))
+
+        cursor.execute("""
+        INSERT INTO menu_items (name, description, category, price)
+        VALUES (?, ?, ?, ?)
+        """, ("Cinnamon Sticks", "Sweet cinnamon sticks with icing", "Dessert", 4.49))
 
     conn.commit()
     conn.close()
@@ -97,6 +142,60 @@ def menu():
     return render_template(
         "menu.html",
         items=items,
+        cart_count=get_cart_count()
+    )
+
+# Checkout page route
+# Displays the checkout page with cart items and total price
+@app.route("/order", methods=["GET", "POST"])
+def order():
+    cart_items = session.get("cart", [])
+    total = sum(item["price"] for item in cart_items)
+
+    if request.method == "POST":
+        customer_name = request.form["customer_name"]
+        phone = request.form["phone"]
+        address = request.form["address"]
+        payment_method = request.form["payment_method"]
+
+        # Save one order record for each item in the cart
+        conn = sqlite3.connect("pizzeria.db")
+        cursor = conn.cursor()
+
+        for item in cart_items:
+            cursor.execute("""
+            INSERT INTO orders (customer_name, phone, pizza_type, pizza_size, quantity, address, payment_method)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+            """, (
+                customer_name,
+                phone,
+                item["pizza_name"],
+                "Standard",
+                1,
+                address,
+                payment_method
+            ))
+
+        conn.commit()
+        conn.close()
+
+        # Clear cart after checkout
+        session["cart"] = []
+
+        return render_template(
+            "checkout_success.html",
+            customer_name=customer_name,
+            phone=phone,
+            address=address,
+            payment_method=payment_method,
+            total=total,
+            cart_count=get_cart_count()
+        )
+
+    return render_template(
+        "order.html",
+        cart_items=cart_items,
+        total=total,
         cart_count=get_cart_count()
     )
 
@@ -154,35 +253,21 @@ def remove_from_cart(item_index):
 
     return redirect(url_for("cart"))
 
-# Order page route
-# Displays order form and handles order submission
-@app.route("/order", methods=["GET", "POST"])
-def order():
-    if request.method == "POST":
-        # Get customer order details from form
-        customer_name = request.form["customer_name"]
-        pizza_size = request.form["pizza_size"]
-        pizza_type = request.form["pizza_type"]
-        quantity = request.form["quantity"]
-        address = request.form["address"]
-
-        # Display order confirmation page
-        return f"""
-        <h1>Order Submitted!</h1>
-        <p>Thank you, {customer_name}.</p>
-        <p>Your {pizza_size} {pizza_type} pizza order has been placed.</p>
-        <p>Quantity: {quantity}</p>
-        <p>Delivery Address: {address}</p>
-        """
-
-    # Load order form page
-    return render_template("order.html", cart_count=get_cart_count())
 
 # Orders page route
 # Displays previous orders page
 @app.route("/orders")
 def orders():
-    return render_template("orders.html", cart_count=get_cart_count())
+    conn = get_db_connection()
+    orders = conn.execute("SELECT * FROM orders").fetchall()
+    conn.close()
+    return render_template("orders.html", orders=orders, cart_count=get_cart_count())
+
+# Contact page route
+# Displays contact information page
+@app.route("/contact")
+def contact():
+    return render_template("contact.html", cart_count=get_cart_count())
 
 # -------------------------
 # Run Application
