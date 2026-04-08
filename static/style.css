@@ -230,3 +230,14 @@ body {
     list-style: none;
     padding: 0;
 }
+/* ============================================================
+   HEADER CONTAINER LAYOUT
+   Centers header content and improves spacing
+   ============================================================ */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
