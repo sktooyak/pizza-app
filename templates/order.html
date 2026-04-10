@@ -62,6 +62,7 @@
         </div>
 
         <!-- RIGHT SIDE: CHECKOUT FORM -->
+         {% if cart_items %}
         <div class="checkout-form">
             <h3>Your Details</h3>
 
@@ -130,6 +131,7 @@
         </div>
 
     </div>
+    {% endif %}
 
     <!-- =========================
          JAVASCRIPT FOR TOGGLING DELIVERY FIELDS
