@@ -176,7 +176,8 @@ body {
    CHECKOUT PAGE
    Two-column layout: order summary + customer details form
    ============================================================ */
-.contact-info {
+
+   .contact-info {
     text-align: center;
     max-width: 600px;
     margin: 40px auto;
@@ -189,6 +190,7 @@ body {
     grid-template-columns: 1fr 1fr; /* Equal-width columns */
     gap: 30px;
     padding: 0 20px;
+    align-items: start;
 }
 
 /* Shared card style for both summary and form panels */
@@ -219,6 +221,83 @@ body {
     box-sizing: border-box; /* Prevents inputs from overflowing their container */
     margin-bottom: 12px;
 }
+/* CHECKOUT ORDER EDIT SECTION */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    gap: 12px;
+}
+
+.cart-item-info {
+    font-size: 18px;
+    color: #222;
+}
+
+.cart-item-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-btn {
+    background-color: #c62828;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.edit-btn:hover {
+    background-color: #a61f1f;
+}
+
+.edit-link {
+    display: inline-block;
+    margin-top: 12px;
+    color: #c62828;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.edit-link:hover {
+    text-decoration: underline;
+}
+/* CARD PAYMENT FIELDS */
+#card-fields {
+    display: none;
+    margin-top: 10px;
+}
+/* =========================
+   ORDER TYPE RADIO BUTTONS
+   ========================= */
+/* SHARED OPTION BUTTONS */
+.option-buttons {
+    display: flex;
+    gap: 20px;
+    margin: 15px 0 25px 0;
+}
+
+.option-buttons label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: white;
+    padding: 10px 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.option-buttons input[type="radio"] {
+    width: auto;
+    margin: 0;
+    cursor: pointer;
+}
+
 /* EMPTY CART BUTTON */
 
 .empty-cart-btn {
