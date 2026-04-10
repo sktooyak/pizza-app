@@ -1,75 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Basic page setup -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - Operation Pizzeria</title>
+
+    <!-- Connect CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
+    <!-- =========================
+         HEADER / NAVIGATION
+         ========================= -->
     <header class="top-header">
         <div class="logo">Operation Pizzeria</div>
+
         <nav class="main-nav">
             <a href="/">Home</a>
-            <a href="/">Deals</a>
             <a href="/menu">Menu</a>
             <a href="/order">Checkout</a>
             <a href="/orders">Orders</a>
             <a href="/contact">Contact Us</a>
         </nav>
-        <a href="/cart" class="cart-button">🛒 Cart ({{ cart_count }})</a>
+
+        <a href="/cart" class="cart-button">
+            🛒 Cart ({{ cart_count }})
+        </a>
     </header>
 
+    <!-- =========================
+         PAGE TITLE
+         ========================= -->
     <main class="hero">
         <h2>Checkout</h2>
         <p>Review your order and enter your details</p>
     </main>
 
+    <!-- =========================
+         MAIN CHECKOUT LAYOUT
+         ========================= -->
     <div class="checkout-container">
 
-        <!-- Order Summary -->
+        <!-- LEFT SIDE: ORDER SUMMARY -->
         <div class="checkout-summary">
             <h3>Your Order</h3>
+
             {% if cart_items %}
                 <ul>
                     {% for item in cart_items %}
                         <li>{{ item.pizza_name }} — ${{ "%.2f"|format(item.price) }}</li>
                     {% endfor %}
                 </ul>
+
                 <p><strong>Total: ${{ "%.2f"|format(total) }}</strong></p>
             {% else %}
                 <p>Your cart is empty.</p>
             {% endif %}
         </div>
 
-        <!-- Customer Info Form -->
+        <!-- RIGHT SIDE: CHECKOUT FORM -->
         <div class="checkout-form">
             <h3>Your Details</h3>
+
             <form method="POST" action="/order">
 
-                <label>Name</label>
-                <input type="text" name="customer_name" required>
+                <!-- ORDER TYPE -->
+                <label>How would you like your order?</label>
 
-                <label>Phone</label>
-                <input type="tel" name="phone" required>
+                <div class="order-type-options">
+                    <label class="radio-inline" for="carryout">
+                        <input type="radio" id="carryout" name="order_type" value="carryout" checked onclick="toggleAddressFields()">
+                        Carryout
+                    </label>
 
-                <label>Delivery Address</label>
-                <input type="text" name="address" required>
+                    <label class="radio-inline" for="delivery">
+                        <input type="radio" id="delivery" name="order_type" value="delivery" onclick="toggleAddressFields()">
+                        Delivery
+                    </label>
+                </div>
 
-                <label>Payment Method</label>
-                <select name="payment_method">
+                <!-- CUSTOMER INFO -->
+                <label for="first_name">First Name</label>
+                <input type="text" id="first_name" name="first_name" required>
+
+                <label for="last_name">Last Name</label>
+                <input type="text" id="last_name" name="last_name" required>
+
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" required>
+
+                <!-- DELIVERY FIELDS
+                     These will hide/show with JavaScript -->
+                <div id="delivery-fields">
+                    <label for="address">Street Address</label>
+                    <input type="text" id="address" name="address">
+
+                    <label for="city">City</label>
+                    <input type="text" id="city" name="city">
+
+                    <label for="state">State</label>
+                    <input type="text" id="state" name="state">
+
+                    <label for="zip_code">Zip / Postal Code</label>
+                    <input type="text" id="zip_code" name="zip_code">
+                </div>
+
+                <!-- PAYMENT -->
+                <label for="payment_method">Payment Method</label>
+                <select id="payment_method" name="payment_method">
                     <option value="cash">Cash</option>
                     <option value="card">Card</option>
                 </select>
 
-                <br><br>
-                <button type="submit">Place Order</button>
+                <!-- SUBMIT -->
+                <button class="place-order-btn" type="submit">Place Order</button>
 
             </form>
         </div>
 
     </div>
+
+    <!-- =========================
+         JAVASCRIPT FOR TOGGLING DELIVERY FIELDS
+         ========================= -->
+    <script>
+        function toggleAddressFields() {
+            const selectedOrderType = document.querySelector('input[name="order_type"]:checked').value;
+            const deliveryFields = document.getElementById("delivery-fields");
+
+            if (selectedOrderType === "delivery") {
+                deliveryFields.style.display = "block";
+            } else {
+                deliveryFields.style.display = "none";
+            }
+        }
+
+        /* Run once when page loads */
+        window.onload = toggleAddressFields;
+    </script>
 
 </body>
 </html>
