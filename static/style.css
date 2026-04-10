@@ -21,10 +21,15 @@ body {
     padding: 14px 30px;
 }
 
+/* clickable logo */
 .logo {
-    color: white;
+    text-decoration: none;
+    color: #c62828;
     font-size: 28px;
     font-weight: bold;
+}
+.logo:hover {
+    color: #f3e9e5;
 }
 
 /* Navigation links sit flush next to each other (gap: 0) */
