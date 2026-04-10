@@ -42,13 +42,17 @@
     <!-- =========================
          MAIN CHECKOUT LAYOUT
          ========================= -->
-    <div class="checkout-container">
+    <!-- =========================
+     MAIN CHECKOUT LAYOUT
+     ========================= -->
 
-        <!-- LEFT SIDE: ORDER SUMMARY -->
-        <div class="checkout-summary">
-    <h3>Your Order</h3>
+{% if cart_items %}
+<div class="checkout-container">
 
-    {% if cart_items %}
+    <!-- LEFT SIDE: ORDER SUMMARY -->
+    <div class="checkout-summary">
+        <h3>Your Order</h3>
+
         <ul class="cart-list">
             {% for item in cart_items %}
                 <li class="cart-item">
@@ -66,68 +70,61 @@
         </ul>
 
         <p><strong>Total: ${{ "%.2f"|format(total) }}</strong></p>
-
         <a href="/menu" class="edit-link">Add More Items</a>
-    {% else %}
-        <p>Your cart is empty.</p>
-    {% endif %}
-</div>
+    </div>
 
-        <!-- RIGHT SIDE: CHECKOUT FORM -->
-         {% if cart_items %}
-        <div class="checkout-form">
-            <h3>Your Details</h3>
+    <!-- RIGHT SIDE: CHECKOUT FORM -->
+    <div class="checkout-form">
+        <h3>Your Details</h3>
 
-            <form method="POST" action="/order">
+        <form method="POST" action="/order">
 
-                <!-- ORDER TYPE -->
-                <label>How would you like your order?</label>
+            <!-- ORDER TYPE -->
+            <label>How would you like your order?</label>
 
-                <div class="option-buttons">
-                    <label>
-                        <input type="radio" id="carryout" name="order_type" value="carryout" checked onclick="toggleAddressFields()">
-                        Carryout
-                    </label>
+            <div class="option-buttons">
+                <label>
+                    <input type="radio" id="carryout" name="order_type" value="carryout" checked onclick="toggleAddressFields()">
+                    Carryout
+                </label>
 
-                    <label>
-                        <input type="radio" id="delivery" name="order_type" value="delivery" onclick="toggleAddressFields()">
-                        Delivery
-                    </label>
-                </div>
+                <label>
+                    <input type="radio" id="delivery" name="order_type" value="delivery" onclick="toggleAddressFields()">
+                    Delivery
+                </label>
+            </div>
 
-                <!-- CUSTOMER INFO -->
-                <label for="customer_name">Name</label>
-                <input type="text" id="customer_name" name="customer_name" required>
+            <!-- CUSTOMER INFO -->
+            <label for="customer_name">Name</label>
+            <input type="text" id="customer_name" name="customer_name" required>
 
-                <label for="phone">Phone</label>
-                <input type="tel" id="phone" name="phone" required>
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" required>
 
-                <!-- DELIVERY FIELDS
-                     These will hide/show with JavaScript -->
-                <div id="delivery-fields">
-                    <label for="address">Address</label>
-                    <input type="text" id="address" name="address">
+            <!-- DELIVERY FIELDS -->
+            <div id="delivery-fields">
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address">
+            </div>
 
-                </div>
+            <!-- PAYMENT -->
+            <label>Payment Method</label>
+            <div class="option-buttons">
+                <label>
+                    <input type="radio" name="payment_method" value="card" checked onclick="toggleCardFields()">
+                    Card
+                </label>
 
-                <!-- PAYMENT -->
-                <label>Payment Method</label>
-                <div class="option-buttons">
-                    <label>
-                        <input type="radio" name="payment_method" value="card" checked onclick="toggleCardFields()">
-                        Card
-                    </label>
+                <label>
+                    <input type="radio" name="payment_method" value="cash" onclick="toggleCardFields()">
+                    Cash
+                </label>
+            </div>
 
-                    <label>
-                        <input type="radio" name="payment_method" value="cash" onclick="toggleCardFields()">
-                        Cash
-                    </label>
-                </div>
-
-                <!-- CARD PAYMENT FIELDS -->
-                <div id="card-fields">
-                    <label for="card_name">Name on Card</label>
-                    <input type="text" id="card_name" name="card_name">
+            <!-- CARD PAYMENT FIELDS -->
+            <div id="card-fields">
+                <label for="card_name">Name on Card</label>
+                <input type="text" id="card_name" name="card_name">
 
                 <label for="card_number">Card Number</label>
                 <input type="text" id="card_number" name="card_number" placeholder="1234 5678 9012 3456">
@@ -139,13 +136,18 @@
                 <input type="text" id="cvv" name="cvv" placeholder="123">
             </div>
 
-        <!-- SUBMIT -->
-        <button class="place-order-btn" type="submit">Place Order</button>
-            </form>
-        </div>
-
+            <button class="place-order-btn" type="submit">Place Order</button>
+        </form>
     </div>
-    {% endif %}
+
+</div>
+
+{% else %}
+<div class="empty-checkout-state">
+    <h3>Your cart is empty.</h3>
+    <a href="/menu" class="empty-cart-btn">Start Order</a>
+</div>
+{% endif %}
 
    
 <script>
