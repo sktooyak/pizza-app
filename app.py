@@ -153,6 +153,14 @@ def order():
     total = sum(item["price"] for item in cart_items)
 
     if request.method == "POST":
+        # Do not allow checkout if cart is empty
+        if not cart_items:
+            return render_template(
+                "order.html",
+                cart_items=cart_items,
+                total=total,
+                cart_count=get_cart_count()
+            )
         customer_name = request.form["customer_name"]
         phone = request.form["phone"]
         address = request.form["address"]
