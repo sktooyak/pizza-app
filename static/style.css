@@ -241,3 +241,26 @@ body {
     justify-content: space-between;
     align-items: center;
 }
+/* =========================
+   PLACE ORDER BUTTON
+   Styles the checkout/order
+   submission button to match
+   the website theme
+   ========================= */
+.place-order-btn {
+    background-color: #c62828;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: 0.3s ease;
+}
+
+.place-order-btn:hover {
+    background-color: #a61f1f;
+    transform: scale(1.03);
+}
