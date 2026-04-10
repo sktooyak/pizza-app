@@ -219,6 +219,31 @@ body {
     box-sizing: border-box; /* Prevents inputs from overflowing their container */
     margin-bottom: 12px;
 }
+/* EMPTY CART BUTTON */
+
+.empty-cart-btn {
+    display: inline-block;
+    margin-top: 15px;
+    background-color: #c62828;
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.empty-cart-btn:hover {
+    background-color: #a61f1f;
+}
+.empty-checkout-state {
+    max-width: 500px;
+    margin: 60px auto;
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
 /* ============================================================
    CART PAGE
    Centered cart layout with item list and total
