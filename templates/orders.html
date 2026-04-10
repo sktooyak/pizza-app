@@ -1,49 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Basic page setup -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orders - Operation Pizzeria</title>
+
+    <!-- Connect CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
+    <!-- =========================
+         HEADER / NAVIGATION
+         ========================= -->
     <header class="top-header">
-        <div class="logo">Operation Pizzeria</div>
+        <a href="/" class="logo">Operation Pizzeria</a>
 
         <nav class="main-nav">
             <a href="/">Home</a>
-            >a href="/">Deals</a>
+            <a href="/deals">Deals</a>
             <a href="/menu">Menu</a>
             <a href="/order">Checkout</a>
             <a href="/orders">Orders</a>
             <a href="/contact">Contact Us</a>
         </nav>
 
-        <a href="/cart" class="cart-button">🛒 Cart ({{ cart_count }})</a>
+        <a href="/cart" class="cart-button">
+            🛒 Cart ({{ cart_count }})
+        </a>
     </header>
 
+    <!-- =========================
+         PAGE TITLE
+         ========================= -->
     <main class="hero">
         <h2>Orders</h2>
-        <p>Submitted customer orders</p>
+        <p>Submitted Customer Orders</p>
     </main>
 
-    <section class="cart-container">
+    <!-- =========================
+         ORDERS LIST
+         ========================= -->
+    <section class="orders-list">
         {% if orders %}
-            <ul class="cart-list">
-                {% for order in orders %}
-                    <li>
-                        <span>
-                            <strong>{{ order.customer_name }}</strong> —
-                            {{ order.pizza_size }} {{ order.pizza_type }},
-                            Qty: {{ order.quantity }},
-                            {{ order.address }}
-                        </span>
-                    </li>
-                {% endfor %}
-            </ul>
+            {% for order in orders %}
+                <div class="order-card">
+                    <h3>{{ order.customer_name }}</h3>
+                    <p><strong>Pizza:</strong> {{ order.pizza_size }} {{ order.pizza_type }}</p>
+                    <p><strong>Quantity:</strong> {{ order.quantity }}</p>
+                    <p><strong>Phone:</strong> {{ order.phone }}</p>
+                    <p><strong>Address:</strong> {{ order.address }}</p>
+                    <p><strong>Payment Method:</strong> {{ order.payment_method|title }}</p>
+                    <p><strong>Order Type:</strong> {{ order.order_type|title }}</p>
+                </div>
+            {% endfor %}
         {% else %}
-            <p>No orders have been submitted yet.</p>
+            <div class="order-card">
+                <p>No orders have been submitted yet.</p>
+            </div>
         {% endif %}
     </section>
 
