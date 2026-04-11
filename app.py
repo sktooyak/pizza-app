@@ -35,6 +35,10 @@ def init_db():
         payment_method TEXT NOT NULL
     )
     """)
+    try:
+        cursor.execute("ALTER TABLE orders ADD COLUMN order_type TEXT")
+    except sqlite3.OperationalError:
+        pass
 
     conn.commit()
     conn.close()
@@ -145,70 +149,6 @@ def menu():
         cart_count=get_cart_count()
     )
 
-# Checkout page route
-# Displays the checkout page with cart items and total price
-@app.route("/order", methods=["GET", "POST"])
-def order():
-    cart_items = session.get("cart", [])
-    total = sum(item["price"] for item in cart_items)
-
-    if request.method == "POST":
-        # Do not allow checkout if cart is empty
-        if not cart_items:
-            return render_template(
-                "order.html",
-                cart_items=cart_items,
-                total=total,
-                cart_count=get_cart_count()
-            )
-        customer_name = request.form["customer_name"]
-        phone = request.form["phone"]
-        address = request.form["address"]
-        payment_method = request.form["payment_method"]
-
-        # Save one order record for each item in the cart
-        conn = sqlite3.connect("pizzeria.db")
-        cursor = conn.cursor()
-
-        for item in cart_items:
-            cursor.execute("""
-            INSERT INTO orders (customer_name, phone, pizza_type, pizza_size, quantity, address, payment_method)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-            """, (
-                customer_name,
-                phone,
-                item["pizza_name"],
-                "Standard",
-                1,
-                address,
-                payment_method
-            ))
-
-        conn.commit()
-        conn.close()
-
-        # Clear cart after checkout
-        session["cart"] = []
-
-        return render_template(
-            "checkout_success.html",
-            customer_name=customer_name,
-            phone=phone,
-            address=address,
-            payment_method=payment_method,
-            total=total,
-            cart_count=get_cart_count()
-        )
-
-    return render_template(
-        "order.html",
-        cart_items=cart_items,
-        total=total,
-        cart_count=get_cart_count()
-    )
-
-# Add to Cart route
-# Handles form submission when user clicks "Add to Cart"
 @app.route("/add_to_cart", methods=["POST"])
 def add_to_cart():
     # Get pizza name and price from submitted form

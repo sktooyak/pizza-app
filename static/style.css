@@ -163,12 +163,23 @@ body {
 
 /* "Add to cart" button inside each card */
 .pizza-card button {
+/* "Add to cart" button inside each card */
+.pizza-card button {
     background-color: #c62828;
     color: white;
     border: none;
     border-radius: 8px;
     padding: 10px 16px;
     cursor: pointer;
+    font-weight: bold;
+}
+
+/* ============================================================
+   CHECKOUT PAGE
+   Two-column layout: order summary + customer details form
+   ============================================================ */
+
+   .contact-info {
     font-weight: bold;
 }
 
@@ -302,61 +313,6 @@ body {
 
 .empty-cart-btn {
     display: inline-block;
-    margin-top: 15px;
-    background-color: #c62828;
-    color: white;
-    text-decoration: none;
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-weight: bold;
-}
-
-.empty-cart-btn:hover {
-    background-color: #a61f1f;
-}
-.empty-checkout-state {
-    max-width: 500px;
-    margin: 60px auto;
-    background-color: white;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-    text-align: center;
-}
-/* ============================================================
-   CART PAGE
-   Centered cart layout with item list and total
-   ============================================================ */
-
-.cart-container {
-    text-align: center;
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 20px;
-}
-
-.cart-list {
-    list-style: none;
-    padding: 0;
-}
-/* ============================================================
-   HEADER CONTAINER LAYOUT
-   Centers header content and improves spacing
-   ============================================================ */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-/* =========================
-   PLACE ORDER BUTTON
-   Styles the checkout/order
-   submission button to match
-   the website theme
-   ========================= */
-.place-order-btn {
     background-color: #c62828;
     color: white;
     border: none;
@@ -372,4 +328,34 @@ body {
 .place-order-btn:hover {
     background-color: #a61f1f;
     transform: scale(1.03);
+}
+/* =========================
+   ORDERS PAGE
+   Styles submitted customer
+   orders into clean cards
+   ========================= */
+.orders-list {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.order-card {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.order-card h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    color: #222;
+}
+
+.order-card p {
+    margin: 8px 0;
+    color: #333;
+    font-size: 16px;
 }
