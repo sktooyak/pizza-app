@@ -455,3 +455,23 @@ body {
 .order-button:hover {
     background-color: #a61f1f;
 }
+
+/* ============================================================
+   CHECKOUT SUCCESS PAGE
+   Displays final order confirmation details
+   ============================================================ */
+.confirmation-box {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    line-height: 2;
+    font-size: 18px;
+}
+
+.confirmation-box p {
+    margin: 12px 0;
+}
