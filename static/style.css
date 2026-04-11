@@ -18,12 +18,8 @@ body {
     max-width: 1200px;
     margin: 0 auto;
 }
-
-.top-header {
+   .top-header {
     background-color: #1f1f1f;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     padding: 14px 30px;
 }
 
@@ -34,25 +30,25 @@ body {
     gap: 20px;
 }
 
-/* clickable logo */
 .logo {
     text-decoration: none;
     color: #c62828;
     font-size: 28px;
     font-weight: bold;
 }
+
 .logo:hover {
     color: #f3e9e5;
 }
 
-/* Navigation links sit flush next to each other (gap: 0) */
 .main-nav {
     display: flex;
     gap: 0;
+    flex-wrap: wrap;
 }
 
 .main-nav a {
-    background-color: #a80000; /* Deep red nav buttons */
+    background-color: #a80000;
     color: white;
     text-decoration: none;
     padding: 12px 28px;
@@ -60,18 +56,17 @@ body {
 }
 
 .main-nav a:hover {
-    background-color: #c62828; /* Lighter red on hover */
+    background-color: #c62828;
 }
 
 .cart-button {
-    background-color: #d62828; /* Bright red, distinct from nav links */
+    background-color: #d62828;
     color: white;
     text-decoration: none;
     padding: 12px 20px;
     border-radius: 8px;
     font-weight: bold;
 }
-
 .empty-checkout-state {
     max-width: 500px;
     margin: 60px auto;
@@ -95,7 +90,6 @@ body {
 
 /* ============================================================
    HERO SECTION
-   Large introductory/banner area at the top of the page
    ============================================================ */
 .hero {
     text-align: center;
@@ -104,7 +98,6 @@ body {
 
 /* ============================================================
    CONTENT SECTIONS
-   Mission statement and contact paragraph blocks
    ============================================================ */
 .mission-section {
     text-align: center;
@@ -123,7 +116,6 @@ body {
     font-size: 1.05rem;
 }
 
-/* Contact paragraph mirrors mission-section layout */
 .contact-paragraph {
     text-align: center;
     padding: 40px 20px 60px;
@@ -143,10 +135,7 @@ body {
 
 /* ============================================================
    MENU SECTION
-   Section title and grid of pizza cards
    ============================================================ */
- 
-/* Section heading aligned with the card grid */
 .menu-section-title {
     max-width: 1200px;
     margin: 35px auto 10px;
@@ -155,8 +144,6 @@ body {
     font-size: 1.8rem;
 }
 
- 
-/* Flex container that wraps cards on smaller screens */
 .menu-container {
     display: flex;
     justify-content: center;
@@ -165,7 +152,6 @@ body {
     flex-wrap: wrap;
 }
 
-/* Individual pizza item card */
 .pizza-card {
     background-color: white;
     border-radius: 10px;
@@ -180,7 +166,6 @@ body {
     margin-bottom: 16px;
 }
 
-/* Min-height keeps cards uniform even with short descriptions */
 .description {
     min-height: 50px;
     margin: 0 0 14px 0;
@@ -195,9 +180,6 @@ body {
     margin: 0;
 }
 
-/* "Add to cart" button inside each card */
-.pizza-card button {
-/* "Add to cart" button inside each card */
 .pizza-card button {
     background-color: #c62828;
     color: white;
@@ -209,36 +191,39 @@ body {
 }
 
 /* ============================================================
-   CHECKOUT PAGE
-   Two-column layout: order summary + customer details form
+   CONTACT PAGE
+   Displays contact information in a centered card
    ============================================================ */
+.contact-info {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    line-height: 2;
+    font-size: 18px;
+}
 
-   .contact-info {
-    font-weight: bold;
+/* Space between each line of contact info */
+.contact-info p {
+    margin: 15px 0;
 }
 
 /* ============================================================
    CHECKOUT PAGE
-   Two-column layout: order summary + customer details form
    ============================================================ */
-
-   .contact-info {
-    text-align: center;
-    max-width: 600px;
-    margin: 40px auto;
-    line-height: 2;
-}
 .checkout-container {
     max-width: 1000px;
     margin: 30px auto 60px;
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Equal-width columns */
+    grid-template-columns: 1fr 1fr;
     gap: 30px;
     padding: 0 20px;
     align-items: start;
 }
 
-/* Shared card style for both summary and form panels */
 .checkout-summary,
 .checkout-form {
     background-color: white;
@@ -247,7 +232,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* Form labels stacked above their inputs */
 .checkout-form label {
     display: block;
     margin-top: 12px;
@@ -255,7 +239,6 @@ body {
     font-weight: bold;
 }
 
-/* Consistent styling across all form input types */
 .checkout-form input,
 .checkout-form textarea,
 .checkout-form select {
@@ -263,10 +246,10 @@ body {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    box-sizing: border-box; /* Prevents inputs from overflowing their container */
+    box-sizing: border-box;
     margin-bottom: 12px;
 }
-/* CHECKOUT ORDER EDIT SECTION */
+
 .cart-item {
     display: flex;
     justify-content: space-between;
@@ -310,15 +293,12 @@ body {
 .edit-link:hover {
     text-decoration: underline;
 }
-/* CARD PAYMENT FIELDS */
+
 #card-fields {
     display: none;
     margin-top: 10px;
 }
-/* =========================
-   ORDER TYPE RADIO BUTTONS
-   ========================= */
-/* SHARED OPTION BUTTONS */
+
 .option-buttons {
     display: flex;
     gap: 20px;
@@ -343,8 +323,6 @@ body {
     cursor: pointer;
 }
 
-/* EMPTY CART BUTTON */
-
 .empty-cart-btn {
     display: inline-block;
     background-color: #c62828;
@@ -363,11 +341,10 @@ body {
     background-color: #a61f1f;
     transform: scale(1.03);
 }
-/* =========================
+
+/* ============================================================
    ORDERS PAGE
-   Styles submitted customer
-   orders into clean cards
-   ========================= */
+   ============================================================ */
 .orders-list {
     max-width: 900px;
     margin: 30px auto;
@@ -392,4 +369,77 @@ body {
     margin: 8px 0;
     color: #333;
     font-size: 16px;
+}
+
+/* ============================================================
+   CART PAGE
+   Displays cart items, total, and checkout button
+   ============================================================ */
+.cart-container {
+    max-width: 800px;
+    margin: 40px auto 60px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.cart-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    gap: 15px;
+}
+
+.cart-item-info {
+    font-size: 18px;
+    color: #222;
+}
+
+.cart-item-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.remove-btn {
+    background-color: #c62828;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.remove-btn:hover {
+    background-color: #a61f1f;
+}
+
+.cart-total {
+    margin-top: 20px;
+    font-size: 22px;
+    color: #222;
+}
+
+.order-button {
+    display: inline-block;
+    margin-top: 20px;
+    background-color: #c62828;
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.order-button:hover {
+    background-color: #a61f1f;
 }
