@@ -13,12 +13,25 @@ body {
    HEADER & NAVIGATION
    Top bar with logo, nav links, and cart button
    ============================================================ */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 .top-header {
     background-color: #1f1f1f;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 14px 30px;
+}
+
+.top-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
 }
 
 /* clickable logo */
