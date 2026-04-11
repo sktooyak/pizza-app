@@ -8,19 +8,21 @@
 </head>
 <body>
     <header class="top-header">
-    <a href="/" class="logo">Operation Pizzeria</a>
+        <div class="container">
+            <a href="/" class="logo">Operation Pizzeria</a>
 
-    <nav class="main-nav">
-        <a href="/">Home</a>
-        <a href="/deals">Deals</a>
-        <a href="/menu">Menu</a>
-        <a href="/order">Checkout</a>
-        <a href="/orders">Orders</a>
-        <a href="/contact">Contact Us</a>
-    </nav>
+            <nav class="main-nav">
+                <a href="/">Home</a>
+                <a href="/deals">Deals</a>
+                <a href="/menu">Menu</a>
+                <a href="/order">Checkout</a>
+                <a href="/orders">Orders</a>
+                <a href="/contact">Contact Us</a>
+            </nav>
 
-    <a href="/cart" class="cart-button">🛒 Cart ({{ cart_count }})</a>
-</header>
+            <a href="/cart" class="cart-button">🛒 Cart ({{ cart_count }})</a>
+        </div>
+    </header>
 
     <main class="hero">
         <h2>Pizza Menu</h2>
@@ -28,79 +30,79 @@
     </main>
 
     <h2 class="menu-section-title">Pizzas</h2>
-<section class="menu-container">
-    {% for item in items %}
-        {% if item.category == "Pizza" %}
-        <div class="pizza-card">
-            <h3>{{ item.name }}</h3>
-            <p class="description">{{ item.description }}</p>
-            <p class="price">${{ item.price }}</p>
+    <section class="menu-container">
+        {% for item in items %}
+            {% if item.category == "Pizza" %}
+            <div class="pizza-card">
+                <h3>{{ item.name }}</h3>
+                <p class="description">{{ item.description }}</p>
+                <p class="price">${{ item.price }}</p>
 
-            <form action="/add_to_cart" method="POST">
-                <input type="hidden" name="pizza_name" value="{{ item.name }}">
-                <input type="hidden" name="price" value="{{ item.price }}">
-                <button type="submit">Add to Cart</button>
-            </form>
-        </div>
-        {% endif %}
-    {% endfor %}
-</section>
+                <form action="/add_to_cart" method="POST">
+                    <input type="hidden" name="pizza_name" value="{{ item.name }}">
+                    <input type="hidden" name="price" value="{{ item.price }}">
+                    <button type="submit">Add to Cart</button>
+                </form>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </section>
 
-<h2 class="menu-section-title">Sides</h2>
-<section class="menu-container">
-    {% for item in items %}
-        {% if item.category == "Sides" %}
-        <div class="pizza-card">
-            <h3>{{ item.name }}</h3>
-            <p class="description">{{ item.description }}</p>
-            <p class="price">${{ item.price }}</p>
+    <h2 class="menu-section-title">Sides</h2>
+    <section class="menu-container">
+        {% for item in items %}
+            {% if item.category == "Sides" %}
+            <div class="pizza-card">
+                <h3>{{ item.name }}</h3>
+                <p class="description">{{ item.description }}</p>
+                <p class="price">${{ item.price }}</p>
 
-            <form action="/add_to_cart" method="POST">
-                <input type="hidden" name="pizza_name" value="{{ item.name }}">
-                <input type="hidden" name="price" value="{{ item.price }}">
-                <button type="submit">Add to Cart</button>
-            </form>
-        </div>
-        {% endif %}
-    {% endfor %}
-</section>
+                <form action="/add_to_cart" method="POST">
+                    <input type="hidden" name="pizza_name" value="{{ item.name }}">
+                    <input type="hidden" name="price" value="{{ item.price }}">
+                    <button type="submit">Add to Cart</button>
+                </form>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </section>
 
-<h2 class="menu-section-title">Drinks</h2>
-<section class="menu-container">
-    {% for item in items %}
-        {% if item.category == "Drinks" %}
-        <div class="pizza-card">
-            <h3>{{ item.name }}</h3>
-            <p class="description">{{ item.description }}</p>
-            <p class="price">${{ item.price }}</p>
+    <h2 class="menu-section-title">Drinks</h2>
+    <section class="menu-container">
+        {% for item in items %}
+            {% if item.category == "Drinks" %}
+            <div class="pizza-card">
+                <h3>{{ item.name }}</h3>
+                <p class="description">{{ item.description }}</p>
+                <p class="price">${{ item.price }}</p>
 
-            <form action="/add_to_cart" method="POST">
-                <input type="hidden" name="pizza_name" value="{{ item.name }}">
-                <input type="hidden" name="price" value="{{ item.price }}">
-                <button type="submit">Add to Cart</button>
-            </form>
-        </div>
-        {% endif %}
-    {% endfor %}
-</section>
+                <form action="/add_to_cart" method="POST">
+                    <input type="hidden" name="pizza_name" value="{{ item.name }}">
+                    <input type="hidden" name="price" value="{{ item.price }}">
+                    <button type="submit">Add to Cart</button>
+                </form>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </section>
 
-<h2 class="menu-section-title">Desserts</h2>
-<section class="menu-container">
-    {% for item in items %}
-        {% if item.category == "Dessert" %}
-        <div class="pizza-card">
-            <h3>{{ item.name }}</h3>
-            <p class="description">{{ item.description }}</p>
-            <p class="price">${{ item.price }}</p>
+    <h2 class="menu-section-title">Desserts</h2>
+    <section class="menu-container">
+        {% for item in items %}
+            {% if item.category == "Dessert" %}
+            <div class="pizza-card">
+                <h3>{{ item.name }}</h3>
+                <p class="description">{{ item.description }}</p>
+                <p class="price">${{ item.price }}</p>
 
-            <form action="/add_to_cart" method="POST">
-                <input type="hidden" name="pizza_name" value="{{ item.name }}">
-                <input type="hidden" name="price" value="{{ item.price }}">
-                <button type="submit">Add to Cart</button>
-            </form>
-        </div>
-        {% endif %}
-    {% endfor %}
-</section>
+                <form action="/add_to_cart" method="POST">
+                    <input type="hidden" name="pizza_name" value="{{ item.name }}">
+                    <input type="hidden" name="price" value="{{ item.price }}">
+                    <button type="submit">Add to Cart</button>
+                </form>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </section>
 </body>
 </html>
