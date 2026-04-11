@@ -7,46 +7,45 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <header>
-        <h1>Operation Pizzeria</h1>
-        <p>Fresh pizza made fast</p>
-    </header>
+    <header class="top-header">
+        <div class="container">
+            <a href="/" class="logo">Operation Pizzeria</a>
 
-    <nav class="main-nav">
-        <a href="/">Home</a>
-        <a href="/deals">Deals</a>
-        <a href="/menu">Menu</a>
-        <a href="/order">Checkout</a>
-        <a href="/orders">Orders</a>
-        <a href="/contact">Contact Us</a>
-    </nav>
+            <nav class="main-nav">
+                <a href="/">Home</a>
+                <a href="/deals">Deals</a>
+                <a href="/menu">Menu</a>
+                <a href="/order">Checkout</a>
+                <a href="/orders">Orders</a>
+                <a href="/contact">Contact Us</a>
+            </nav>
 
-   <a href="/cart" class="cart-button">🛒 Cart ({{ cart_count }})</a>
+            <a href="/cart" class="cart-button">🛒 Cart ({{ cart_count }})</a>
         </div>
-</header>
+    </header>
 
     <main class="hero">
         <h2>Welcome to Operation Pizzeria</h2>
         <p>Order your favorite pizza online.</p>
         <a href="/menu" class="order-button">Order Now</a>
     </main>
+
     <section class="mission-section">
-    <h2>Our Mission</h2>
-    <p>
-        At <strong>Operation Pizzeria</strong>, our mission is to bring families and friends together
-        through fresh, delicious pizza made with quality ingredients and served with care.
-        We are committed to creating a welcoming experience, fast service, and flavors
-        that keep our community coming back for more.
-    </p>
-</section>
-   <section class="contact-paragraph">
-    <h2>Contact Operation Pizzeria</h2>
-    <p>
+        <h2>Our Mission</h2>
+        <p>
+            At <strong>Operation Pizzeria</strong>, our mission is to bring families and friends together
+            through fresh, delicious pizza made with quality ingredients and served with care.
+            We are committed to creating a welcoming experience, fast service, and flavors
+            that keep our community coming back for more.
+        </p>
+    </section>
+
+    <section class="contact-paragraph">
+        <h2>Contact Operation Pizzeria</h2>
         <p><strong>📍 Address:</strong> 123 Pizza Lane, Phoenix, AZ</p>
         <p><strong>📞 Phone:</strong> (602) 555-1234</p>
         <p><strong>📧 Email:</strong> contact@operationpizzeria.com</p>
         <p><strong>🕒 Hours:</strong> 11 AM – 10 PM Daily</p>
-    </p>
-
+    </section>
 </body>
 </html>
