@@ -72,6 +72,27 @@ body {
     font-weight: bold;
 }
 
+.empty-checkout-state {
+    max-width: 500px;
+    margin: 60px auto;
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.empty-cart-btn {
+    display: inline-block;
+    margin-top: 15px;
+    background-color: #c62828;
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
 /* ============================================================
    HERO SECTION
    Large introductory/banner area at the top of the page
