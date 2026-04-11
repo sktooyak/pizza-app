@@ -1,33 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Page setup and responsive settings -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Browser tab title -->
     <title>Contact Us - Operation Pizzeria</title>
+
+    <!-- Link to external CSS stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
+    <!-- =========================
+         HEADER / NAVIGATION
+         Logo, navigation links, and cart button
+         ========================= -->
     <header class="top-header">
-        <div class="logo">Operation Pizzeria</div>
+        <div class="container">
 
-        <nav class="main-nav">
-            <a href="/">Home</a>
-            <a href="/">Deals</a>
-            <a href="/menu">Menu</a>
-            <a href="/order">Checkout</a>
-            <a href="/orders">Orders</a>
-            <a href="/contact">Contact Us</a>
-        </nav>
+            <!-- Clickable logo returns user to homepage -->
+            <a href="/" class="logo">Operation Pizzeria</a>
 
-        <a href="/cart" class="cart-button">🛒 Cart ({{ cart_count }})</a>
+            <!-- Main site navigation -->
+            <nav class="main-nav">
+                <a href="/">Home</a>
+                <a href="/deals">Deals</a>
+                <a href="/menu">Menu</a>
+                <a href="/order">Checkout</a>
+                <a href="/orders">Orders</a>
+                <a href="/contact">Contact Us</a>
+            </nav>
+
+            <!-- Shopping cart button with live cart count -->
+            <a href="/cart" class="cart-button">🛒 Cart ({{ cart_count }})</a>
+        </div>
     </header>
 
+    <!-- =========================
+         PAGE HERO / TITLE
+         ========================= -->
     <main class="hero">
         <h2>Contact Operation Pizzeria</h2>
         <p>We would love to hear from you.</p>
     </main>
 
+    <!-- =========================
+         CONTACT INFORMATION
+         ========================= -->
     <section class="contact-info">
         <p><strong>📍 Address:</strong> 123 Pizza Lane, Phoenix, AZ</p>
         <p><strong>📞 Phone:</strong> (602) 555-1234</p>
