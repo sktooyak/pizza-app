@@ -255,6 +255,15 @@ body {
     font-weight: bold;
 }
 
+.pizza-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    margin-bottom: 15px;
+}
+
 /* ============================================================
    CONTACT PAGE
    Displays contact information in a centered card
