@@ -46,7 +46,6 @@ body {
     transition: color 0.25s ease;
 }
 
-
 .logo:hover {
     color: #e73d13;
 }
