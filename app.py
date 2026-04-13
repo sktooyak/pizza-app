@@ -201,6 +201,60 @@ def remove_from_cart(item_index):
 
     return redirect(url_for("cart"))
 
+# Order page route
+# Displays checkout page and handles order submission
+@app.route("/order", methods=["GET", "POST"])
+def order():
+    cart_items = session.get("cart", [])
+    total = sum(item["price"] for item in cart_items)
+
+    if request.method == "POST":
+        customer_name = request.form["customer_name"]
+        phone = request.form["phone"]
+        address = request.form.get("address", "")
+        payment_method = request.form["payment_method"]
+        order_type = request.form["order_type"]
+
+        conn = get_db_connection()
+        conn.execute(
+            """
+            INSERT INTO orders (
+                customer_name, phone, pizza_type, pizza_size, quantity, address, payment_method, order_type
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                customer_name,
+                phone,
+                "Cart Order",
+                "N/A",
+                len(cart_items),
+                address,
+                payment_method,
+                order_type,
+            ),
+        )
+        conn.commit()
+        conn.close()
+
+        session["cart"] = []
+
+        return render_template(
+            "checkout_success.html",
+            customer_name=customer_name,
+            phone=phone,
+            address=address,
+            payment_method=payment_method,
+            order_type=order_type,
+            total=total,
+            cart_count=get_cart_count()
+        )
+
+    return render_template(
+        "order.html",
+        cart_items=cart_items,
+        total=total,
+        cart_count=get_cart_count()
+    )
 
 # Orders page route
 # Displays previous orders page

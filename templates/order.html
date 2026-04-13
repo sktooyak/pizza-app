@@ -1,204 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Basic page setup -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - Operation Pizzeria</title>
-
-    <!-- Connect CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-    <!-- =========================
-         HEADER / NAVIGATION
-         ========================= -->
     <header class="top-header">
-        <a href="/" class="logo">Operation Pizzeria</a>
+        <div class="container">
+            <a href="/" class="logo">Operation Pizzeria</a>
 
-        <nav class="main-nav">
-            <a href="/">Home</a>
-            <a href="/deals">Deals</a>
-            <a href="/menu">Menu</a>
-            <a href="/order">Checkout</a>
-            <a href="/orders">Orders</a>
-            <a href="/contact">Contact Us</a>
-        </nav>
+            <nav class="main-nav">
+                <a href="/">Home</a>
+                <a href="/deals">Deals</a>
+                <a href="/menu">Menu</a>
+                <a href="/order">Checkout</a>
+                <a href="/orders">Orders</a>
+                <a href="/contact">Contact Us</a>
+            </nav>
 
-        <a href="/cart" class="cart-button">
-            🛒 Cart ({{ cart_count }})
-        </a>
+            <a href="/cart" class="cart-button">🛒 Cart ({{ cart_count }})</a>
+        </div>
     </header>
 
-    <!-- =========================
-         PAGE TITLE
-         ========================= -->
     <main class="hero">
         <h2>Checkout</h2>
         <p>Review your order and enter your details</p>
     </main>
 
-    <!-- =========================
-         MAIN CHECKOUT LAYOUT
-         ========================= -->
-    <!-- =========================
-     MAIN CHECKOUT LAYOUT
-     ========================= -->
+    {% if cart_items %}
+    <div class="checkout-container">
 
-{% if cart_items %}
-<div class="checkout-container">
+        <div class="checkout-summary">
+            <h3>Your Order</h3>
 
-    <!-- LEFT SIDE: ORDER SUMMARY -->
-    <div class="checkout-summary">
-        <h3>Your Order</h3>
+            <ul class="cart-list">
+                {% for item in cart_items %}
+                    <li class="cart-item">
+                        <div class="cart-item-info">
+                            {{ item.pizza_name }} — ${{ "%.2f"|format(item.price) }}
+                        </div>
 
-        <ul class="cart-list">
-            {% for item in cart_items %}
-                <li class="cart-item">
-                    <div class="cart-item-info">
-                        {{ item.pizza_name }} — ${{ "%.2f"|format(item.price) }}
-                    </div>
+                        <div class="cart-item-actions">
+                            <form action="{{ url_for('remove_from_cart', item_index=loop.index0) }}" method="POST">
+                                <button type="submit" class="edit-btn">Remove</button>
+                            </form>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
 
-                    <div class="cart-item-actions">
-                        <form action="{{ url_for('remove_from_cart', item_index=loop.index0) }}" method="POST">
-                            <button type="submit" class="edit-btn">Remove</button>
-                        </form>
-                    </div>
-                </li>
-            {% endfor %}
-        </ul>
+            <p><strong>Total: ${{ "%.2f"|format(total) }}</strong></p>
+            <a href="/menu" class="edit-link">Add More Items</a>
+        </div>
 
-        <p><strong>Total: ${{ "%.2f"|format(total) }}</strong></p>
-        <a href="/menu" class="edit-link">Add More Items</a>
+        <div class="checkout-form">
+            <h3>Your Details</h3>
+
+            <form method="POST" action="/order">
+                <label>How would you like your order?</label>
+                <div class="option-buttons">
+                    <label>
+                        <input type="radio" id="carryout" name="order_type" value="carryout" checked onclick="toggleAddressFields()">
+                        Carryout
+                    </label>
+
+                    <label>
+                        <input type="radio" id="delivery" name="order_type" value="delivery" onclick="toggleAddressFields()">
+                        Delivery
+                    </label>
+                </div>
+
+                <label for="customer_name">Name</label>
+                <input type="text" id="customer_name" name="customer_name" required>
+
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" required>
+
+                <div id="delivery-fields">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" name="address">
+                </div>
+
+                <label>Payment Method</label>
+                <div class="option-buttons">
+                    <label>
+                        <input type="radio" name="payment_method" value="card" checked onclick="toggleCardFields()">
+                        Card
+                    </label>
+
+                    <label>
+                        <input type="radio" name="payment_method" value="cash" onclick="toggleCardFields()">
+                        Cash
+                    </label>
+                </div>
+
+                <div id="card-fields">
+                    <label for="card_name">Name on Card</label>
+                    <input type="text" id="card_name" name="card_name">
+
+                    <label for="card_number">Card Number</label>
+                    <input type="text" id="card_number" name="card_number" placeholder="1234 5678 9012 3456">
+
+                    <label for="expiry_date">Expiration Date</label>
+                    <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YY">
+
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" name="cvv" placeholder="123">
+                </div>
+
+                <button class="place-order-btn" type="submit">Place Order</button>
+            </form>
+        </div>
+
     </div>
 
-    <!-- RIGHT SIDE: CHECKOUT FORM -->
-    <div class="checkout-form">
-        <h3>Your Details</h3>
-
-        <form method="POST" action="/order">
-
-            <!-- ORDER TYPE -->
-            <label>How would you like your order?</label>
-
-            <div class="option-buttons">
-                <label>
-                    <input type="radio" id="carryout" name="order_type" value="carryout" checked onclick="toggleAddressFields()">
-                    Carryout
-                </label>
-
-                <label>
-                    <input type="radio" id="delivery" name="order_type" value="delivery" onclick="toggleAddressFields()">
-                    Delivery
-                </label>
-            </div>
-
-            <!-- CUSTOMER INFO -->
-            <label for="customer_name">Name</label>
-            <input type="text" id="customer_name" name="customer_name" required>
-
-            <label for="phone">Phone</label>
-            <input type="tel" id="phone" name="phone" required>
-
-            <!-- DELIVERY FIELDS -->
-            <div id="delivery-fields">
-                <label for="address">Address</label>
-                <input type="text" id="address" name="address">
-            </div>
-
-            <!-- PAYMENT -->
-            <label>Payment Method</label>
-            <div class="option-buttons">
-                <label>
-                    <input type="radio" name="payment_method" value="card" checked onclick="toggleCardFields()">
-                    Card
-                </label>
-
-                <label>
-                    <input type="radio" name="payment_method" value="cash" onclick="toggleCardFields()">
-                    Cash
-                </label>
-            </div>
-
-            <!-- CARD PAYMENT FIELDS -->
-            <div id="card-fields">
-                <label for="card_name">Name on Card</label>
-                <input type="text" id="card_name" name="card_name">
-
-                <label for="card_number">Card Number</label>
-                <input type="text" id="card_number" name="card_number" placeholder="1234 5678 9012 3456">
-
-                <label for="expiry_date">Expiration Date</label>
-                <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YY">
-
-                <label for="cvv">CVV</label>
-                <input type="text" id="cvv" name="cvv" placeholder="123">
-            </div>
-
-            <button class="place-order-btn" type="submit">Place Order</button>
-        </form>
+    {% else %}
+    <div class="empty-checkout-state">
+        <h3>Your cart is empty.</h3>
+        <a href="/menu" class="empty-cart-btn">Start Order</a>
     </div>
+    {% endif %}
 
-</div>
-
-{% else %}
-<div class="empty-checkout-state">
-    <h3>Your cart is empty.</h3>
-    <a href="/menu" class="empty-cart-btn">Start Order</a>
-</div>
-{% endif %}
-
-   
-<script>
-    /* =========================
-       TOGGLE DELIVERY ADDRESS
-       Shows address field only
-       when Delivery is selected
-       ========================= */
-    function toggleAddressFields() {
-        const selectedOrderType =
-            document.querySelector('input[name="order_type"]:checked').value;
-
-        const deliveryFields =
-            document.getElementById("delivery-fields");
-
-        if (selectedOrderType === "delivery") {
-            deliveryFields.style.display = "block";
-        } else {
-            deliveryFields.style.display = "none";
+    <script>
+        function toggleAddressFields() {
+            const selectedOrderType = document.querySelector('input[name="order_type"]:checked').value;
+            const deliveryFields = document.getElementById("delivery-fields");
+            deliveryFields.style.display = selectedOrderType === "delivery" ? "block" : "none";
         }
-    }
 
-    /* =========================
-       TOGGLE CARD INFORMATION
-       Shows card details only
-       when Card is selected
-       ========================= */
-    function toggleCardFields() {
-        const selectedPayment =
-            document.querySelector('input[name="payment_method"]:checked').value;
-
-        const cardFields =
-            document.getElementById("card-fields");
-
-        if (selectedPayment === "card") {
-            cardFields.style.display = "block";
-        } else {
-            cardFields.style.display = "none";
+        function toggleCardFields() {
+            const selectedPayment = document.querySelector('input[name="payment_method"]:checked').value;
+            const cardFields = document.getElementById("card-fields");
+            cardFields.style.display = selectedPayment === "card" ? "block" : "none";
         }
-    }
 
-    /* =========================
-       PAGE LOAD INITIALIZER
-       Runs both toggle functions
-       when page first loads
-       ========================= */
-    window.onload = function () {
-        toggleAddressFields();
-        toggleCardFields();
-    };
-</script>
+        window.onload = function () {
+            toggleAddressFields();
+            toggleCardFields();
+        };
+    </script>
 
 </body>
 </html>

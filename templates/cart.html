@@ -1,54 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Basic page setup -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart - Operation Pizzeria</title>
+
+    <!-- Connect stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
+    <!-- =========================
+         HEADER / NAVIGATION
+         ========================= -->
     <header class="top-header">
-        <a href="/" class="logo">Operation Pizzeria</a>
+        <div class="container">
+            <!-- Clickable site logo -->
+            <a href="/" class="logo">Operation Pizzeria</a>
 
-        <nav class="main-nav">
-            <a href="/">Home</a>
-            <a href="/deals">Deals</a>
-            <a href="/menu">Menu</a>
-            <a href="/order">Checkout</a>
-            <a href="/orders">Orders</a>
-            <a href="/contact">Contact Us</a>
-        </nav>
+            <!-- Main navigation links -->
+            <nav class="main-nav">
+                <a href="/">Home</a>
+                <a href="/deals">Deals</a>
+                <a href="/menu">Menu</a>
+                <a href="/order">Checkout</a>
+                <a href="/orders">Orders</a>
+                <a href="/contact">Contact Us</a>
+            </nav>
 
-        <a href="/cart" class="cart-button">🛒 Cart ({{ cart_count }})</a>
+            <!-- Shopping cart button -->
+            <a href="/cart" class="cart-button">🛒 Cart ({{ cart_count }})</a>
+        </div>
     </header>
 
+    <!-- =========================
+         PAGE HERO
+         ========================= -->
     <main class="hero">
         <h2>Your Shopping Cart</h2>
         <p>Review your items before checkout.</p>
     </main>
 
-    <section class="cart-container">
-        {% if cart_items %}
-            <ul class="cart-list">
-                {% for item in cart_items %}
-                    <li>
-                        <span>{{ item.pizza_name }} - ${{ item.price }}</span>
+    <!-- =========================
+         CART CONTENT
+         ========================= -->
+    {% if cart_items %}
+<section class="cart-container">
+    <ul class="cart-list">
+        {% for item in cart_items %}
+            <li class="cart-item">
+                <div class="cart-item-info">
+                    {{ item.pizza_name }} - ${{ "%.2f"|format(item.price) }}
+                </div>
 
-                        <form action="/remove_from_cart/{{ loop.index0 }}" method="POST">
-                            <button type="submit" class="remove-btn">Remove</button>
-                        </form>
-                    </li>
-                {% endfor %}
-            </ul>
+                <div class="cart-item-actions">
+                    <form action="/remove_from_cart/{{ loop.index0 }}" method="POST">
+                        <button type="submit" class="remove-btn">Remove</button>
+                    </form>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
 
-            <h3 class="cart-total">Total: ${{ total }}</h3>
-            <a href="/order" class="order-button">Proceed to Checkout</a>
-        {% else %}
-            <p>Your cart is empty.</p>
-            <a href="/menu" class="order-button">Go to Menu</a>
-        {% endif %}
-    </section>
+    <h3 class="cart-total">Total: ${{ "%.2f"|format(total) }}</h3>
+    <a href="/order" class="order-button">Proceed to Checkout</a>
+</section>
+
+{% else %}
+<div class="empty-checkout-state">
+    <h3>Your cart is empty.</h3>
+    <a href="/menu" class="empty-cart-btn">Go to Menu</a>
+</div>
+{% endif %}
 
 </body>
 </html>

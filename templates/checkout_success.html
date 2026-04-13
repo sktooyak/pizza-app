@@ -1,38 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Basic page setup -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Confirmed - Operation Pizzeria</title>
+
+    <!-- Link to shared stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
+    <!-- =========================
+         HEADER / NAVIGATION
+         ========================= -->
     <header class="top-header">
-        <div class="logo">Operation Pizzeria</div>
+        <div class="container">
+            <!-- Clickable logo -->
+            <a href="/" class="logo">Operation Pizzeria</a>
 
-        <nav class="main-nav">
-            <a href="/">Home</a>
-            <a href="/">Deals</a>
-            <a href="/menu">Menu</a>
-            <a href="/order">Checkout</a>
-            <a href="/orders">Orders</a>
-            <a href="/contact">Contact Us</a>
-        </nav>
+            <!-- Main navigation -->
+            <nav class="main-nav">
+                <a href="/">Home</a>
+                <a href="/deals">Deals</a>
+                <a href="/menu">Menu</a>
+                <a href="/order">Checkout</a>
+                <a href="/orders">Orders</a>
+                <a href="/contact">Contact Us</a>
+            </nav>
 
-        <a href="/cart" class="cart-button">🛒 Cart ({{ cart_count }})</a>
+            <!-- Cart button -->
+            <a href="/cart" class="cart-button">🛒 Cart ({{ cart_count }})</a>
+        </div>
     </header>
 
+    <!-- =========================
+         PAGE HERO
+         ========================= -->
     <main class="hero">
         <h2>Order Confirmed</h2>
         <p>Thank you for your order, {{ customer_name }}.</p>
     </main>
 
-    <section class="contact-box">
+    <!-- =========================
+         ORDER CONFIRMATION DETAILS
+         ========================= -->
+    <section class="confirmation-box">
         <p><strong>Phone:</strong> {{ phone }}</p>
-        <p><strong>Address:</strong> {{ address }}</p>
-        <p><strong>Payment Method:</strong> {{ payment_method }}</p>
-        <p><strong>Total Paid:</strong> ${{ total }}</p>
+
+        {% if order_type == "delivery" %}
+            <p><strong>Address:</strong> {{ address }}</p>
+        {% endif %}
+
+        <p><strong>Payment Method:</strong> {{ payment_method|title }}</p>
+        <p><strong>Total Paid:</strong> ${{ "%.2f"|format(total) }}</p>
         <p>Your order has been submitted successfully.</p>
     </section>
 
