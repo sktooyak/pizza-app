@@ -33,13 +33,10 @@ def init_db():
         pizza_size TEXT NOT NULL,
         quantity INTEGER NOT NULL,
         address TEXT NOT NULL,
-        payment_method TEXT NOT NULL
+        payment_method TEXT NOT NULL,
+        delivery_type TEXT NOT NULL
     )
     """)
-    try:
-        cursor.execute("ALTER TABLE orders ADD COLUMN order_type TEXT")
-    except sqlite3.OperationalError:
-        pass
 
     conn.commit()
     conn.close()
@@ -71,8 +68,8 @@ def seed_data():
         INSERT INTO menu_items (name, description, category, price, image)
         VALUES (?, ?, ?, ?, ?)
         """, ("Veggie Pizza", "Loaded with fresh vegetables", "Pizza", 11.99, "veggie.jpg"))
-        
-         # Sides
+
+        # Sides
         cursor.execute("""
         INSERT INTO menu_items (name, description, category, price, image)
         VALUES (?, ?, ?, ?, ?)
@@ -112,32 +109,28 @@ def seed_data():
 # -------------------------
 # Database Connection
 # -------------------------
-# Create and return a connection to the SQLite database
 def get_db_connection():
     conn = sqlite3.connect("pizzeria.db")
     conn.row_factory = sqlite3.Row
     return conn
 
+
 # -------------------------
 # Helper Functions
 # -------------------------
-# Returns the number of items currently in the shopping cart
 def get_cart_count():
     cart = session.get("cart", [])
     return len(cart)
 
+
 # -------------------------
 # Routes
 # -------------------------
-
-# Home page route
-# Displays the main landing page and shows cart count in navigation
 @app.route("/")
 def home():
     return render_template("home.html", cart_count=get_cart_count())
 
-# Menu page route
-# Displays the pizza menu page
+
 @app.route("/menu")
 def menu():
     conn = get_db_connection()
@@ -150,60 +143,7 @@ def menu():
         cart_count=get_cart_count()
     )
 
-@app.route("/add_to_cart", methods=["POST"])
-def add_to_cart():
-    # Get pizza name and price from submitted form
-    pizza_name = request.form["pizza_name"]
-    price = float(request.form["price"])
 
-    # Create dictionary object for cart item
-    item = {
-        "pizza_name": pizza_name,
-        "price": price
-    }
-
-    # Create cart session if it does not already exist
-    if "cart" not in session:
-        session["cart"] = []
-
-    # Add item to shopping cart
-    cart = session["cart"]
-    cart.append(item)
-    session["cart"] = cart
-
-    # Redirect user to cart page after adding item
-    return redirect(url_for("cart"))
-
-# Cart page route
-# Displays all items currently in cart and calculates total price
-@app.route("/cart")
-def cart():
-    cart_items = session.get("cart", [])
-
-    # Calculate total cart price
-    total = sum(item["price"] for item in cart_items)
-    return render_template(
-        "cart.html",
-        cart_items=cart_items,
-        total=total,
-        cart_count=get_cart_count()
-    )
-
-# Remove from Cart route
-# Removes selected pizza from cart using its index
-@app.route("/remove_from_cart/<int:item_index>", methods=["POST"])
-def remove_from_cart(item_index):
-    cart = session.get("cart", [])
-
-    # Check that selected index exists before removing item
-    if 0 <= item_index < len(cart):
-        cart.pop(item_index)
-        session["cart"] = cart
-
-    return redirect(url_for("cart"))
-
-# Order page route
-# Displays checkout page and handles order submission
 @app.route("/order", methods=["GET", "POST"])
 def order():
     cart_items = session.get("cart", [])
@@ -212,31 +152,43 @@ def order():
     if request.method == "POST":
         customer_name = request.form["customer_name"]
         phone = request.form["phone"]
-        address = request.form.get("address", "")
+        address = request.form["address"]
         payment_method = request.form["payment_method"]
-        order_type = request.form["order_type"]
+        delivery_type = request.form["delivery_type"]
+        
 
-        conn = get_db_connection()
-        conn.execute(
-            """
+        conn = sqlite3.connect("pizzeria.db")
+        cursor = conn.cursor()
+
+        # Save one order record for each item in the cart
+        for item in cart_items:
+            cursor.execute("""
             INSERT INTO orders (
-                customer_name, phone, pizza_type, pizza_size, quantity, address, payment_method, order_type
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-            """,
-            (
                 customer_name,
                 phone,
-                "Cart Order",
-                "N/A",
-                len(cart_items),
+                pizza_type,
+                pizza_size,
+                quantity,
                 address,
                 payment_method,
-                order_type,
-            ),
-        )
+                delivery_type
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                customer_name,
+                phone,
+                item["pizza_name"],
+                "Standard",
+                1,
+                address,
+                payment_method,
+                delivery_type
+            ))
+
         conn.commit()
         conn.close()
 
+        # Clear cart after checkout
         session["cart"] = []
 
         return render_template(
@@ -245,8 +197,8 @@ def order():
             phone=phone,
             address=address,
             payment_method=payment_method,
-            order_type=order_type,
             total=total,
+            delivery_type=delivery_type,
             cart_count=get_cart_count()
         )
 
@@ -257,25 +209,72 @@ def order():
         cart_count=get_cart_count()
     )
 
-# Orders page route
-# Displays previous orders page
+
+@app.route("/add_to_cart", methods=["POST"])
+def add_to_cart():
+    pizza_name = request.form["pizza_name"]
+    price = float(request.form["price"])
+
+    item = {
+        "pizza_name": pizza_name,
+        "price": price
+    }
+
+    if "cart" not in session:
+        session["cart"] = []
+
+    cart = session["cart"]
+    cart.append(item)
+    session["cart"] = cart
+
+    return redirect(url_for("cart"))
+
+
+@app.route("/cart")
+def cart():
+    cart_items = session.get("cart", [])
+    total = sum(item["price"] for item in cart_items)
+
+    return render_template(
+        "cart.html",
+        cart_items=cart_items,
+        total=total,
+        cart_count=get_cart_count()
+    )
+
+
+@app.route("/remove_from_cart/<int:item_index>", methods=["POST"])
+def remove_from_cart(item_index):
+    cart = session.get("cart", [])
+
+    if 0 <= item_index < len(cart):
+        cart.pop(item_index)
+        session["cart"] = cart
+
+    return redirect(url_for("cart"))
+
+
 @app.route("/orders")
 def orders():
     conn = get_db_connection()
     orders = conn.execute("SELECT * FROM orders").fetchall()
     conn.close()
-    return render_template("orders.html", orders=orders, cart_count=get_cart_count())
 
-# Contact page route
-# Displays contact information page
+    return render_template(
+        "orders.html",
+        orders=orders,
+        cart_count=get_cart_count()
+    )
+
+
 @app.route("/contact")
 def contact():
     return render_template("contact.html", cart_count=get_cart_count())
 
+
 # -------------------------
 # Run Application
 # -------------------------
-# Starts Flask development server
 if __name__ == "__main__":
     init_db()
     seed_data()
