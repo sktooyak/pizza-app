@@ -46,16 +46,17 @@
          ORDER CONFIRMATION DETAILS
          ========================= -->
     <section class="confirmation-box">
-        <p><strong>Phone:</strong> {{ phone }}</p>
+    <p><strong>Phone:</strong> {{ phone }}</p>
+    <p><strong>Order Type:</strong> {{ delivery_type }}</p>
 
-        {% if order_type == "delivery" %}
-            <p><strong>Address:</strong> {{ address }}</p>
-        {% endif %}
+    {% if delivery_type == "delivery" %}
+        <p><strong>Address:</strong> {{ address }}</p>
+    {% endif %}
 
-        <p><strong>Payment Method:</strong> {{ payment_method|title }}</p>
-        <p><strong>Total Paid:</strong> ${{ "%.2f"|format(total) }}</p>
-        <p>Your order has been submitted successfully.</p>
-    </section>
+    <p><strong>Payment Method:</strong> {{ payment_method|title }}</p>
+    <p><strong>Total Paid:</strong> ${{ "%.2f"|format(total) }}</p>
+    <p>Your order has been submitted successfully.</p>
+</section>
 
 </body>
 </html>
