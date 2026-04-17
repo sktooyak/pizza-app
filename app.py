@@ -20,7 +20,8 @@ def init_db():
         name TEXT NOT NULL,
         description TEXT,
         category TEXT,
-        price REAL NOT NULL
+        price REAL NOT NULL,
+        image TEXT
     )
     """)
     cursor.execute("""
@@ -53,22 +54,53 @@ def seed_data():
     count = cursor.fetchone()[0]
 
     if count == 0:
-        sample_items = [
-            ("Cheese Pizza", "Fresh mozzarella and tomato sauce", "Pizza", 10.99),
-            ("Pepperoni Pizza", "Classic pepperoni and mozzarella cheese", "Pizza", 12.99),
-            ("Veggie Pizza", "Loaded with fresh vegetables", "Pizza", 11.99),
-            ("Wings", "Crispy buffalo wings", "Sides", 6.99),
-            ("Breadsticks", "Warm breadsticks with dipping sauce", "Sides", 5.49),
-            ("Pepsi", "20 oz cold Pepsi", "Drinks", 2.49),
-            ("Lemonade", "Fresh lemonade", "Drinks", 2.99),
-            ("Brownie", "Warm chocolate brownie", "Dessert", 3.99),
-            ("Cinnamon Sticks", "Sweet cinnamon sticks with icing", "Dessert", 4.49)
-        ]
+        cursor.execute("""
+        INSERT INTO menu_items (name, description, category, price, image)
+        VALUES (?, ?, ?, ?, ?)
+        """, ("Cheese Pizza", "Fresh mozzarella and tomato sauce", "Pizza", 10.99, "cheese.jpg"))
 
-        cursor.executemany("""
-        INSERT INTO menu_items (name, description, category, price)
-        VALUES (?, ?, ?, ?)
-        """, sample_items)
+        cursor.execute("""
+        INSERT INTO menu_items (name, description, category, price, image)
+        VALUES (?, ?, ?, ?, ?)
+        """, ("Pepperoni Pizza", "Classic pepperoni and mozzarella cheese", "Pizza", 12.99, "pepperoni.jpg"))
+
+        cursor.execute("""
+        INSERT INTO menu_items (name, description, category, price, image)
+        VALUES (?, ?, ?, ?, ?)
+        """, ("Veggie Pizza", "Loaded with fresh vegetables", "Pizza", 11.99, "veggie.jpg"))
+
+        # Sides
+        cursor.execute("""
+        INSERT INTO menu_items (name, description, category, price, image)
+        VALUES (?, ?, ?, ?, ?)
+        """, ("Wings", "Crispy buffalo wings", "Sides", 6.99, "wings.jpg"))
+
+        cursor.execute("""
+        INSERT INTO menu_items (name, description, category, price, image)
+        VALUES (?, ?, ?, ?, ?)
+        """, ("Breadsticks", "Warm breadsticks with dipping sauce", "Sides", 5.49, "breadsticks.jpg"))
+
+        # Drinks
+        cursor.execute("""
+        INSERT INTO menu_items (name, description, category, price, image)
+        VALUES (?, ?, ?, ?, ?)
+        """, ("Pepsi", "20 oz cold Pepsi", "Drinks", 2.49, "pepsi.jpg"))
+
+        cursor.execute("""
+        INSERT INTO menu_items (name, description, category, price, image)
+        VALUES (?, ?, ?, ?, ?)
+        """, ("Lemonade", "Fresh lemonade", "Drinks", 2.99, "lemonade.jpg"))
+
+        # Desserts
+        cursor.execute("""
+        INSERT INTO menu_items (name, description, category, price, image)
+        VALUES (?, ?, ?, ?, ?)
+        """, ("Brownie", "Warm chocolate brownie", "Dessert", 3.99, "brownie.jpg"))
+
+        cursor.execute("""
+        INSERT INTO menu_items (name, description, category, price, image)
+        VALUES (?, ?, ?, ?, ?)
+        """, ("Cinnamon Sticks", "Sweet cinnamon sticks with icing", "Dessert", 4.49, "cinnamon-sticks.jpg"))
 
     conn.commit()
     conn.close()

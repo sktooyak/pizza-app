@@ -30,6 +30,37 @@
         <a href="/menu" class="order-button">Order Now</a>
     </main>
 
+    <section class="hero-image">
+    <img src="{{ url_for('static', filename='images/featured-pizza.jpg') }}" alt="Featured Pizza">
+</section>
+
+<section class="featured-pizzas">
+    <h2>Popular Favorites</h2>
+
+    <div class="pizza-cards">
+        <div class="pizza-card">
+            <img src="{{ url_for('static', filename='images/pepperoni.jpg') }}" alt="Pepperoni Pizza">
+            <h3>Pepperoni Pizza</h3>
+            <p>Classic pepperoni with melted mozzarella</p>
+            <p>$14.99</p>
+        </div>
+
+        <div class="pizza-card">
+            <img src="{{ url_for('static', filename='images/cheese.jpg') }}" alt="Cheese Pizza">
+            <h3>Cheese Pizza</h3>
+            <p>Fresh mozzarella and rich tomato sauce</p>
+            <p>$12.99</p>
+        </div>
+
+        <div class="pizza-card">
+            <img src="{{ url_for('static', filename='images/veggie.jpg') }}" alt="Veggie Pizza">
+            <h3>Veggie Pizza</h3>
+            <p>Loaded with veggies and premium toppings</p>
+            <p>$17.99</p>
+        </div>
+    </div>
+</section>
+
     <section class="mission-section">
         <h2>Our Mission</h2>
         <p>

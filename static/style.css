@@ -14,8 +14,8 @@ body {
    Top bar with logo, nav links, and cart button
    ============================================================ */
 .container {
-    width: 90%;
-    max-width: 1200px;
+    width: 96%;
+    max-width: 1400px;
     margin: 0 auto;
 }
    .top-header {
@@ -25,20 +25,29 @@ body {
 
 .top-header .container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    gap: 20px;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.main-nav {
+    display: flex;
+    gap: 0;
+    flex-wrap: nowrap;
 }
 
 .logo {
     text-decoration: none;
-    color: #c62828;
-    font-size: 28px;
+    color: #fff5ee;
+    font-size: 26px;
     font-weight: bold;
+    white-space: nowrap;
+    margin-right: 50px;
+    transition: color 0.25s ease;
 }
 
 .logo:hover {
-    color: #f3e9e5;
+    color: #e73d13;
 }
 
 .main-nav {
@@ -67,6 +76,11 @@ body {
     border-radius: 8px;
     font-weight: bold;
 }
+
+.cart-button:hover {
+    background-color: #a80000;
+    transition: background-color 0.25s ease;
+}
 .empty-checkout-state {
     max-width: 500px;
     margin: 60px auto;
@@ -88,6 +102,10 @@ body {
     font-weight: bold;
 }
 
+/* ============================================================
+   HOME PAGE
+   Hero section, mission statement, and menu highlights
+   ============================================================ */
 /* ============================================================
    HERO SECTION
    ============================================================ */
@@ -131,6 +149,52 @@ body {
 
 .contact-paragraph p {
     font-size: 1.05rem;
+}
+
+/* ============================================================
+   PHOTO SECTION
+   ============================================================ */
+.hero-image {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.hero-image img {
+    width: 90%;
+    max-width: 1000px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.featured-pizzas {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.pizza-cards {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.pizza-card {
+    background-color: white;
+    width: 250px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.pizza-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    margin-bottom: 15px;
 }
 
 /* ============================================================
@@ -188,6 +252,15 @@ body {
     padding: 10px 16px;
     cursor: pointer;
     font-weight: bold;
+}
+
+.pizza-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    margin-bottom: 15px;
 }
 
 /* ============================================================

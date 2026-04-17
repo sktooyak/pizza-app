@@ -34,6 +34,7 @@
         {% for item in items %}
             {% if item.category == "Pizza" %}
             <div class="pizza-card">
+                <img src="{{ url_for('static', filename='images/' ~ item.image) }}" alt="{{ item.name }}">
                 <h3>{{ item.name }}</h3>
                 <p class="description">{{ item.description }}</p>
                 <p class="price">${{ item.price }}</p>
@@ -53,6 +54,7 @@
         {% for item in items %}
             {% if item.category == "Sides" %}
             <div class="pizza-card">
+                <img src="{{ url_for('static', filename='images/' ~ item.image) }}" alt="{{ item.name }}">
                 <h3>{{ item.name }}</h3>
                 <p class="description">{{ item.description }}</p>
                 <p class="price">${{ item.price }}</p>
@@ -72,6 +74,7 @@
         {% for item in items %}
             {% if item.category == "Drinks" %}
             <div class="pizza-card">
+                <img src="{{ url_for('static', filename='images/' ~ item.image) }}" alt="{{ item.name }}">
                 <h3>{{ item.name }}</h3>
                 <p class="description">{{ item.description }}</p>
                 <p class="price">${{ item.price }}</p>
@@ -91,6 +94,7 @@
         {% for item in items %}
             {% if item.category == "Dessert" %}
             <div class="pizza-card">
+                <img src="{{ url_for('static', filename='images/' ~ item.image) }}" alt="{{ item.name }}">
                 <h3>{{ item.name }}</h3>
                 <p class="description">{{ item.description }}</p>
                 <p class="price">${{ item.price }}</p>
