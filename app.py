@@ -160,13 +160,6 @@ def seed_deals():
     conn.commit()
     conn.close()
 
-    # Ensure database/tables exist when the app starts, including on Render
-    if __name__ == "__main__":
-        init_db()
-        seed_data()
-        seed_deals()
-        app.run(debug=True)
-
 # -------------------------
 # Database Connection
 # -------------------------
@@ -455,5 +448,10 @@ def contact():
 # -------------------------
 # Run Application
 # -------------------------
+# Ensure database/tables exist when the app starts, including on Render
+init_db()
+seed_data()
+seed_deals()
+
 if __name__ == "__main__":
     app.run(debug=True)
