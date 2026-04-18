@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operation Pizzeria</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header class="top-header">
+    <div class="container">
+        <a href="/" class="logo">Operation Pizzeria</a>
+
+        <nav class="main-nav">
+            <a href="/">Home</a>
+            <a href="/deals">Deals</a>
+            <a href="/menu">Menu</a>
+            <a href="/order">Checkout</a>
+            <a href="/orders">Orders</a>
+            <a href="/contact">Contact Us</a>
+        </nav>
+
+        <div class="nav-right">
+            <a href="{{ url_for('admin_dashboard') }}" class="admin-link">Admin Login</a>
+
+            <div class="account-links">
+                <a href="{{ url_for('login') }}" class="auth-link">Sign In / Sign Up</a>
+                <a href="{{ url_for('cart') }}" class="cart-button">🛒 Cart ({{ cart_count }})</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- PAGE CONTENT GOES HERE -->
+{% block content %}{% endblock %}
+
+</body>
+</html>

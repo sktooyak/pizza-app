@@ -27,11 +27,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 30px;
+    gap: 24px;
+    flex-wrap: nowrap;
 }
 
 .main-nav {
     display: flex;
+    align-items: center;
     gap: 0;
     flex-wrap: nowrap;
 }
@@ -53,7 +55,7 @@ body {
 .main-nav {
     display: flex;
     gap: 0;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .main-nav a {
@@ -62,10 +64,75 @@ body {
     text-decoration: none;
     padding: 12px 28px;
     font-weight: bold;
+    white-space: nowrap;
 }
 
 .main-nav a:hover {
     background-color: #c62828;
+}
+
+/* RIGHT SIDE OF NAVBAR */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-left: auto;
+    flex-wrap: nowrap;
+}
+
+.nav-right a {
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.25s ease;
+}
+
+/* Admin stays subtle */
+.admin-link {
+    color: #666 !important;
+    font-size: 12px;
+    font-weight: 400;
+    opacity: 0.55;
+}
+
+.admin-link:hover {
+    color: #bdbdbd !important;
+    opacity: 0.9;
+}
+
+/* Customer actions grouped together */
+.account-links {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+/* Sign In / Sign Up */
+.auth-link {
+    color: #fff5ee !important;
+    background-color: transparent;
+    border: 2px solid #fff5ee;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-weight: 600;
+}
+
+.auth-link:hover {
+    background-color: #fff5ee;
+    color: #1f1f1f !important;
+}
+
+/* Cart stays primary */
+.cart-button {
+    background-color: #e52b23;
+    color: #ffffff !important;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 700;
+}
+
+.cart-button:hover {
+    background-color: #b71c1c;
+    color: #ffffff !important;
 }
 
 .cart-button {
