@@ -35,7 +35,7 @@ def init_db():
         quantity INTEGER NOT NULL,
         address TEXT NOT NULL,
         payment_method TEXT NOT NULL,
-        delivery_type TEXT NOT NULL
+        order_type TEXT NOT NULL
     )
     """)
     cursor.execute("""
@@ -280,7 +280,7 @@ def order():
         phone = request.form["phone"]
         address = request.form["address"]
         payment_method = request.form["payment_method"]
-        delivery_type = request.form["delivery_type"]
+        order_type = request.form["order_type"]
         
 
         conn = sqlite3.connect("pizzeria.db")
@@ -297,7 +297,7 @@ def order():
                 quantity,
                 address,
                 payment_method,
-                delivery_type
+                order_type
             )
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             """, (
@@ -308,7 +308,7 @@ def order():
                 1,
                 address,
                 payment_method,
-                delivery_type
+                order_type
             ))
 
         conn.commit()
@@ -324,7 +324,7 @@ def order():
             address=address,
             payment_method=payment_method,
             total=total,
-            delivery_type=delivery_type,
+            order_type=order_type,
             cart_count=get_cart_count()
         )
 

@@ -63,12 +63,12 @@
                 <label>How would you like your order?</label>
                 <div class="option-buttons">
                     <label>
-                        <input type="radio" id="carryout" name="delivery_type" value="carry-out" checked onclick="toggleAddressFields()">
+                        <input type="radio" id="carryout" name="order_type" value="carryout" checked onclick="toggleAddressFields()">
                         Carryout
                     </label>
 
                     <label>
-                        <input type="radio" id="delivery" name="delivery_type" value="delivery" onclick="toggleAddressFields()">
+                        <input type="radio" id="delivery" name="order_type" value="delivery" onclick="toggleAddressFields()">
                         Delivery
                     </label>
                 </div>
@@ -126,7 +126,7 @@
 
     <script>
         function toggleAddressFields() {
-            const selectedOrderType = document.querySelector('input[name="delivery_type"]:checked').value;
+            const selectedOrderType = document.querySelector('input[name="order_type"]:checked').value;
             const deliveryFields = document.getElementById("delivery-fields");
             deliveryFields.style.display = selectedOrderType === "delivery" ? "block" : "none";
         }

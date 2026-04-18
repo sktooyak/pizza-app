@@ -47,9 +47,9 @@
          ========================= -->
     <section class="confirmation-box">
     <p><strong>Phone:</strong> {{ phone }}</p>
-    <p><strong>Order Type:</strong> {{ delivery_type }}</p>
+    <p><strong>Order Type:</strong> {{ order_type|title }}</p>
 
-    {% if delivery_type == "delivery" %}
+    {% if order_type == "delivery" %}
         <p><strong>Address:</strong> {{ address }}</p>
     {% endif %}
 
