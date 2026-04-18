@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <h2>Admin Dashboard</h2>
+    <p>Welcome {{ user["username"] }}</p>
+
+    <h3>Orders</h3>
+
+    {% for order in orders %}
+        <p>
+            {{ order.customer_name }} -
+            {{ order.pizza_type }} -
+            {{ order.delivery_type }}
+        </p>
+    {% endfor %}
+
+    <br>
+    <a href="/logout">Logout</a>
+</body>
+</html>
