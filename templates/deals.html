@@ -10,4 +10,11 @@
   <p>• Family Feast: 2 Large Pizzas + Breadsticks for $24.99</p>
   <p>• Student Discount: 10% off with ID</p>
 </section>
+
+{% for deal in deals %}
+  <h3>{{ deal.title }}</h3>
+  <p>{{ deal.description }}</p>
+  <p>${{ deal.price }}</p>
+{% endfor %}
+
 {% endblock %}

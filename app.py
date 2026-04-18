@@ -132,9 +132,6 @@ def seed_data():
 
     conn.commit()
     conn.close()
-# Ensure database/tables exist when the app starts, including on Render
-init_db()
-seed_data()
 
 # Deals Page Menu
 def seed_deals():
@@ -162,6 +159,13 @@ def seed_deals():
 
     conn.commit()
     conn.close()
+
+    # Ensure database/tables exist when the app starts, including on Render
+    if __name__ == "__main__":
+        init_db()
+        seed_data()
+        seed_deals()
+        app.run(debug=True)
 
 # -------------------------
 # Database Connection
