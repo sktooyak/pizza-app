@@ -1,39 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Basic page setup -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Confirmed - Operation Pizzeria</title>
+{% extends "base.html" %}
 
-    <!-- Link to shared stylesheet -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-
-    <!-- =========================
-         HEADER / NAVIGATION
-         ========================= -->
-    <header class="top-header">
-        <div class="container">
-            <!-- Clickable logo -->
-            <a href="/" class="logo">Operation Pizzeria</a>
-
-            <!-- Main navigation -->
-            <nav class="main-nav">
-                <a href="/">Home</a>
-                <a href="/deals">Deals</a>
-                <a href="/menu">Menu</a>
-                <a href="/order">Checkout</a>
-                <a href="/orders">Orders</a>
-                <a href="/contact">Contact Us</a>
-            </nav>
-
-            <!-- Cart button -->
-            <a href="/cart" class="cart-button">🛒 Cart ({{ cart_count }})</a>
-        </div>
-    </header>
-
+{% block content %}
     <!-- =========================
          PAGE HERO
          ========================= -->
@@ -57,6 +24,4 @@
     <p><strong>Total Paid:</strong> ${{ "%.2f"|format(total) }}</p>
     <p>Your order has been submitted successfully.</p>
 </section>
-
-</body>
-</html>
+{% endblock %}

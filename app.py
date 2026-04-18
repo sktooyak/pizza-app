@@ -46,6 +46,18 @@ def init_db():
         role TEXT NOT NULL
     )
     """)
+    # Deals Page
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS deals (
+        deal_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL,
+        description TEXT,
+        price REAL NOT NULL,
+        image TEXT,
+        is_active INTEGER DEFAULT 1
+    )
+    """)
+
     conn.commit()
     conn.close()
 
@@ -123,6 +135,33 @@ def seed_data():
 # Ensure database/tables exist when the app starts, including on Render
 init_db()
 seed_data()
+
+# Deals Page Menu
+def seed_deals():
+    conn = sqlite3.connect("pizzeria.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT COUNT(*) FROM deals")
+    count = cursor.fetchone()[0]
+
+    if count == 0:
+        cursor.execute("""
+        INSERT INTO deals (title, description, price, image, is_active)
+        VALUES (?, ?, ?, ?, ?)
+        """, ("Large 2-Topping Pizza", "One large pizza with 2 toppings", 14.99, "deal-large-pizza.jpg", 1))
+
+        cursor.execute("""
+        INSERT INTO deals (title, description, price, image, is_active)
+        VALUES (?, ?, ?, ?, ?)
+        """, ("Pizza + Wings Combo", "Medium pizza with 6 wings", 19.99, "deal-combo.jpg", 1))
+
+        cursor.execute("""
+        INSERT INTO deals (title, description, price, image, is_active)
+        VALUES (?, ?, ?, ?, ?)
+        """, ("Family Meal Deal", "2 large pizzas and breadsticks", 29.99, "deal-family.jpg", 1))
+
+    conn.commit()
+    conn.close()
 
 # -------------------------
 # Database Connection
@@ -256,6 +295,17 @@ def admin_dashboard():
         orders=orders,
         cart_count=get_cart_count()
     )
+
+# Deals Page
+@app.route("/deals")
+def deals():
+    conn = get_db_connection()
+    deals = conn.execute(
+        "SELECT * FROM deals WHERE is_active = 1"
+    ).fetchall()
+    conn.close()
+
+    return render_template("deals.html", deals=deals, cart_count=get_cart_count())
 
 @app.route("/menu")
 def menu():

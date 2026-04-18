@@ -1,30 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout - Operation Pizzeria</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+{% extends "base.html" %}
 
-    <header class="top-header">
-        <div class="container">
-            <a href="/" class="logo">Operation Pizzeria</a>
-
-            <nav class="main-nav">
-                <a href="/">Home</a>
-                <a href="/deals">Deals</a>
-                <a href="/menu">Menu</a>
-                <a href="/order">Checkout</a>
-                <a href="/orders">Orders</a>
-                <a href="/contact">Contact Us</a>
-            </nav>
-
-            <a href="/cart" class="cart-button">🛒 Cart ({{ cart_count }})</a>
-        </div>
-    </header>
-
+{% block content %}
     <main class="hero">
         <h2>Checkout</h2>
         <p>Review your order and enter your details</p>
@@ -142,6 +118,4 @@
             toggleCardFields();
         };
     </script>
-
-</body>
-</html>
+{% endblock %}

@@ -1,29 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <header class="top-header">
-        <div class="container">
-            <a href="/" class="logo">Operation Pizzeria</a>
+{% extends "base.html" %}
 
-            <nav class="main-nav">
-                <a href="/">Home</a>
-                <a href="/deals">Deals</a>
-                <a href="/menu">Menu</a>
-                <a href="/order">Checkout</a>
-                <a href="/orders">Orders</a>
-                <a href="/contact">Contact Us</a>
-            </nav>
-
-            <a href="/cart" class="cart-button">🛒 Cart ({{ cart_count }})</a>
-        </div>
-    </header>
-
+{% block content %}
     <main class="hero">
         <h2>Pizza Menu</h2>
         <p>Choose your favorite pizza.</p>
@@ -108,5 +85,4 @@
             {% endif %}
         {% endfor %}
     </section>
-</body>
-</html>
+{% endblock %}

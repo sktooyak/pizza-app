@@ -1,39 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Basic page setup -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart - Operation Pizzeria</title>
+{% extends "base.html" %}
 
-    <!-- Connect stylesheet -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-
-    <!-- =========================
-         HEADER / NAVIGATION
-         ========================= -->
-    <header class="top-header">
-        <div class="container">
-            <!-- Clickable site logo -->
-            <a href="/" class="logo">Operation Pizzeria</a>
-
-            <!-- Main navigation links -->
-            <nav class="main-nav">
-                <a href="/">Home</a>
-                <a href="/deals">Deals</a>
-                <a href="/menu">Menu</a>
-                <a href="/order">Checkout</a>
-                <a href="/orders">Orders</a>
-                <a href="/contact">Contact Us</a>
-            </nav>
-
-            <!-- Shopping cart button -->
-            <a href="/cart" class="cart-button">🛒 Cart ({{ cart_count }})</a>
-        </div>
-    </header>
-
+{% block content %}
     <!-- =========================
          PAGE HERO
          ========================= -->
@@ -73,6 +40,4 @@
     <a href="/menu" class="empty-cart-btn">Go to Menu</a>
 </div>
 {% endif %}
-
-</body>
-</html>
+{% endblock %}
