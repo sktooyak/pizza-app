@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Admin Dashboard</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block content %}
+<div class="dashboard-container">
     <h2>Admin Dashboard</h2>
     <p>Welcome {{ user["username"] }}</p>
 
@@ -13,11 +11,11 @@
         <p>
             {{ order.customer_name }} -
             {{ order.pizza_type }} -
-            {{ order.order_type }}
+            {{ order.delivery_type }}
         </p>
     {% endfor %}
 
     <br>
     <a href="/logout">Logout</a>
-</body>
-</html>
+</div>
+{% endblock %}
