@@ -1,20 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Today's Deals</h1>
-<p>Large 2-topping pizza for $12.99</p>
+    <main class="hero">
+        <h2>Today's Deals</h2>
+        <p>Check out our latest pizza specials and combo offers.</p>
+    </main>
 
-<section class="specials">
-  <h2>Weekly Specials</h2>
-  <p>• Buy 1 Medium Pizza, Get 1 Half Off</p>
-  <p>• Family Feast: 2 Large Pizzas + Breadsticks for $24.99</p>
-  <p>• Student Discount: 10% off with ID</p>
-</section>
+    <h2 class="menu-section-title">Featured Deals</h2>
+    <section class="menu-container">
+        {% for deal in deals %}
+        <div class="pizza-card">
+            <img src="{{ url_for('static', filename='images/' ~ deal.image) }}" alt="{{ deal.title }}">
+            <h3>{{ deal.title }}</h3>
+            <p class="description">{{ deal.description }}</p>
+            <p class="price">${{ deal.price }}</p>
 
-{% for deal in deals %}
-  <h3>{{ deal.title }}</h3>
-  <p>{{ deal.description }}</p>
-  <p>${{ deal.price }}</p>
-{% endfor %}
-
+            <form action="/add_to_cart" method="POST">
+                <input type="hidden" name="pizza_name" value="{{ deal.title }}">
+                <input type="hidden" name="price" value="{{ deal.price }}">
+                <button type="submit">Add to Cart</button>
+            </form>
+        </div>
+        {% endfor %}
+    </section>
 {% endblock %}

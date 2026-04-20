@@ -25,7 +25,18 @@
            
 
             <div class="account-links">
-                <a href="{{ url_for('login') }}" class="auth-link">Sign In / Sign Up</a>
+                {% if g.user %}
+                    {% if g.user["role"] == "admin" %}
+                        <a href="{{ url_for('admin_dashboard') }}" class="auth-link">Admin Dashboard</a>
+                    {% else %}
+                        <a href="{{ url_for('customer_dashboard') }}" class="auth-link">My Account</a>
+                    {% endif %}
+
+                    <a href="{{ url_for('logout') }}" class="auth-link logout">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="auth-link">Sign In / Sign Up</a>
+                {% endif %}
+
                 <a href="{{ url_for('cart') }}" class="cart-button">🛒 Cart ({{ cart_count }})</a>
             </div>
         </div>

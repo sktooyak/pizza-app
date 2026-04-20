@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Customer Dashboard</title>
-</head>
-<body>
-    <h2>Welcome {{ user["username"] }}</h2>
+{% extends "base.html" %}
+
+{% block content %}
+<div class="dashboard-container">
+    <h2>Welcome, {{ user["username"].capitalize() }}</h2>
     <p>You are logged in as a customer.</p>
 
-    <a href="/menu">Go to Menu</a><br><br>
+    <a href="/menu">Go to Menu</a>
+    <a href="/orders" class="dashboard-btn"> My Orders</a>
     <a href="/logout">Logout</a>
-</body>
-</html>
+</div>
+{% endblock %}

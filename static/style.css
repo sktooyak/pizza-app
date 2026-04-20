@@ -13,12 +13,16 @@ body {
    HEADER & NAVIGATION
    Top bar with logo, nav links, and cart button
    ============================================================ */
+html {
+    overflow-y: scroll;
+}
+
 .container {
     width: 96%;
     max-width: 1400px;
     margin: 0 auto;
 }
-   .top-header {
+.top-header {
     background-color: #1f1f1f;
     padding: 14px 30px;
 }
@@ -84,19 +88,6 @@ body {
     text-decoration: none;
     white-space: nowrap;
     transition: all 0.25s ease;
-}
-
-/* Admin stays subtle */
-.admin-link {
-    color: #666 !important;
-    font-size: 12px;
-    font-weight: 400;
-    opacity: 0.55;
-}
-
-.admin-link:hover {
-    color: #bdbdbd !important;
-    opacity: 0.9;
 }
 
 /* Customer actions grouped together */
@@ -223,7 +214,7 @@ body {
    ============================================================ */
 .hero-image {
     text-align: center;
-    margin: 20px 0;
+    margin: 20px 0 20px 0;
 }
 
 .hero-image img {
@@ -614,4 +605,201 @@ body {
 
 .confirmation-box p {
     margin: 12px 0;
+}
+
+/* =========================
+   LOGIN PAGE CONTAINER
+========================= */
+.login-container {
+    max-width: 420px;                       /* keeps login box from stretching too wide */
+    margin: 80px auto;                      /* centers horizontally with space from top */
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+
+/* =========================
+   LOGIN TITLE
+========================= */
+.login-container h2 {
+    margin-bottom: 10px;
+    font-size: 28px;
+    color: #222;
+}
+
+
+/* =========================
+   ERROR MESSAGE
+========================= */
+.error-message {
+    color: #d62828;
+    background: #fdeaea;
+    border: 1px solid #f5b5b5;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+
+/* =========================
+   LOGIN FORM
+========================= */
+.login-form {
+    display: flex;
+    flex-direction: column;                 /* stacks inputs vertically */
+    gap: 12px;                              /* space between fields */
+}
+
+
+/* =========================
+   INPUT FIELDS
+========================= */
+.login-form input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    box-sizing: border-box;                 /* keeps width from overflowing */
+}
+
+
+/* =========================
+   LOGIN BUTTON
+========================= */
+.login-form button {
+    padding: 12px;
+    background: #d62828;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.login-form button:hover {
+    background: #b71f1f;
+}
+
+
+/* =========================
+   SIGNUP TEXT
+========================= */
+.signup-text {
+    margin-top: 18px;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+
+/* =========================
+   SIGNUP LINK
+========================= */
+.signup-link {
+    color: #d62828;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+}
+
+/* =========================
+   DASHBOARD PAGE CONTAINER
+========================= */
+.dashboard-container {
+    max-width: 500px;
+    margin: 80px auto;
+    padding: 28px;
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+
+/* =========================
+   TITLE
+========================= */
+.dashboard-container h2 {
+    margin-bottom: 6px;
+    font-size: 26px;
+}
+
+
+/* =========================
+   SUBTEXT
+========================= */
+.dashboard-container p {
+    color: #666;
+    margin-bottom: 14px; /* tighter spacing */
+}
+
+
+/* =========================
+   BUTTON BASE (ALL LINKS)
+========================= */
+.dashboard-container a {
+    display: block;
+    margin: 6px auto;        /* consistent spacing */
+    padding: 12px;
+    width: 80%;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+
+/* =========================
+   PRIMARY BUTTON (MENU)
+========================= */
+.dashboard-container a[href="/menu"] {
+    background: #d62828;
+    color: white;
+    margin-bottom: 8px; /* reduce extra gap */
+}
+
+.dashboard-container a[href="/menu"]:hover {
+    background: #b71f1f;
+}
+
+
+/* =========================
+   SECONDARY BUTTON (ORDERS)
+========================= */
+.dashboard-btn {
+    background: #f1f1f1;
+    color: #333;
+}
+
+.dashboard-btn:hover {
+    background: #ddd;
+}
+
+
+/* =========================
+   LOGOUT BUTTON
+========================= */
+.dashboard-container a[href="/logout"] {
+    background: #333;
+    color: white;
+}
+
+.dashboard-container a[href="/logout"]:hover {
+    background: #111;
+}
+
+
+/* =========================
+   HOVER LIFT EFFECT (polish)
+========================= */
+.dashboard-container a:hover {
+    transform: translateY(-1px);
 }

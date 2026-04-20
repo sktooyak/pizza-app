@@ -145,17 +145,17 @@ def seed_deals():
         cursor.execute("""
         INSERT INTO deals (title, description, price, image, is_active)
         VALUES (?, ?, ?, ?, ?)
-        """, ("Large 2-Topping Pizza", "One large pizza with 2 toppings", 14.99, "deal-large-pizza.jpg", 1))
+        """, ("2 Pizza Deal", "Two pizzas", 19.99, "deal-two-pizzas.jpg", 1))
 
         cursor.execute("""
         INSERT INTO deals (title, description, price, image, is_active)
         VALUES (?, ?, ?, ?, ?)
-        """, ("Pizza + Wings Combo", "Medium pizza with 6 wings", 19.99, "deal-combo.jpg", 1))
+        """, ("Pizza + Wings Combo", "Pizza with 6 wings", 19.99, "deal-combo.jpg", 1))
 
         cursor.execute("""
         INSERT INTO deals (title, description, price, image, is_active)
         VALUES (?, ?, ?, ?, ?)
-        """, ("Family Meal Deal", "2 large pizzas and breadsticks", 29.99, "deal-family.jpg", 1))
+        """, ("Family Meal Deal", "2 pizzas and breadsticks", 29.99, "deal-family.jpg", 1))
 
     conn.commit()
     conn.close()
@@ -287,7 +287,7 @@ def admin_dashboard():
     conn.close()
 
     return render_template(
-        "admin_dashboard.html",
+        "admin.html",
         user=g.user,
         orders=orders,
         cart_count=get_cart_count()

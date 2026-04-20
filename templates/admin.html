@@ -3,7 +3,8 @@
 {% block content %}
 <div class="dashboard-container">
     <h2>Admin Dashboard</h2>
-    <p>Welcome {{ user["username"] }}</p>
+    <p>Welcome, {{ user["username"].capitalize() }}</p>
+
 
     <h3>Orders</h3>
 
@@ -11,7 +12,7 @@
         <p>
             {{ order.customer_name }} -
             {{ order.pizza_type }} -
-            {{ order.delivery_type }}
+            {{ order.order_type }}
         </p>
     {% endfor %}
 
