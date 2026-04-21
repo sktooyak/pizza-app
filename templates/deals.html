@@ -1,26 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <main class="hero">
-        <h2>Today's Deals</h2>
-        <p>Check out our latest pizza specials and combo offers.</p>
-    </main>
 
-    <h2 class="menu-section-title">Featured Deals</h2>
-    <section class="menu-container">
+<section class="featured-pizzas">
+    <h2>Special Deals</h2>
+
+    <div class="pizza-cards">
         {% for deal in deals %}
         <div class="pizza-card">
-            <img src="{{ url_for('static', filename='images/' ~ deal.image) }}" alt="{{ deal.title }}">
-            <h3>{{ deal.title }}</h3>
-            <p class="description">{{ deal.description }}</p>
-            <p class="price">${{ deal.price }}</p>
+            <img src="{{ url_for('static', filename='images/' ~ deal['image']) }}" alt="{{ deal['title'] }}">
 
-            <form action="/add_to_cart" method="POST">
-                <input type="hidden" name="pizza_name" value="{{ deal.title }}">
-                <input type="hidden" name="price" value="{{ deal.price }}">
+            <h3>{{ deal['title'] }}</h3>
+            <p>{{ deal['description'] }}</p>
+            <p>${{ deal['price'] }}</p>
+
+            <form action="{{ url_for('add_to_cart') }}" method="POST">
+                <input type="hidden" name="item_name" value="{{ deal['title'] }}">
+                <input type="hidden" name="price" value="{{ deal['price'] }}">
                 <button type="submit">Add to Cart</button>
             </form>
         </div>
         {% endfor %}
-    </section>
+    </div>
+</section>
+
 {% endblock %}
