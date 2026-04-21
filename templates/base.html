@@ -12,6 +12,7 @@
     <div class="container">
         <a href="/" class="logo">Operation Pizzeria</a>
 
+        {% if not g.user or g.user["role"] != "admin" %}
         <nav class="main-nav">
             <a href="/">Home</a>
             <a href="/deals">Deals</a>
@@ -20,25 +21,33 @@
             <a href="/orders">Orders</a>
             <a href="/contact">Contact Us</a>
         </nav>
+        {% endif %}
 
         <div class="nav-right">
            
 
             <div class="account-links">
-                {% if g.user %}
-                    {% if g.user["role"] == "admin" %}
-                        <a href="{{ url_for('admin_dashboard') }}" class="auth-link">Admin Dashboard</a>
-                    {% else %}
-                        <a href="{{ url_for('customer_dashboard') }}" class="auth-link">My Account</a>
-                    {% endif %}
+    {% if g.user %}
+        
+        {% if g.user["role"] == "admin" %}
+            <a href="{{ url_for('home') }}" class="auth-link">View Storefront</a>
+            <a href="{{ url_for('admin_dashboard') }}" class="auth-link">Admin Dashboard</a>
+        {% else %}
+            <a href="{{ url_for('customer_dashboard') }}" class="auth-link">My Account</a>
+        {% endif %}
 
-                    <a href="{{ url_for('logout') }}" class="auth-link logout">Logout</a>
-                {% else %}
-                    <a href="{{ url_for('login') }}" class="auth-link">Sign In / Sign Up</a>
-                {% endif %}
+        <a href="{{ url_for('logout') }}" class="auth-link logout">Logout</a>
 
-                <a href="{{ url_for('cart') }}" class="cart-button">🛒 Cart ({{ cart_count }})</a>
-            </div>
+    {% else %}
+        <a href="{{ url_for('login') }}" class="auth-link">Sign In / Sign Up</a>
+    {% endif %}
+
+    {% if not g.user or g.user["role"] != "admin" %}
+        <a href="{{ url_for('cart') }}" class="cart-button">
+            🛒 Cart ({{ cart_count|default(0) }})
+        </a>
+    {% endif %}
+</div>
         </div>
     </div>
 </header>
