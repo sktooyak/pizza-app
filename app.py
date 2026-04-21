@@ -145,17 +145,22 @@ def seed_deals():
         cursor.execute("""
         INSERT INTO deals (title, description, price, image, is_active)
         VALUES (?, ?, ?, ?, ?)
-        """, ("2 Pizza Deal", "Two pizzas", 19.99, "deal-two-pizzas.jpg", 1))
+        """, ("Two Large Pizza Deal", "Two large 1‑topping pizzas", 19.99, "deal-two-large.jpg", 1))
 
         cursor.execute("""
         INSERT INTO deals (title, description, price, image, is_active)
         VALUES (?, ?, ?, ?, ?)
-        """, ("Pizza + Wings Combo", "Pizza with 6 wings", 19.99, "deal-combo.jpg", 1))
+        """, ("Pizza & Wings Combo", "Large pizza + 8 wings", 22.99, "deal-pizza-wings.jpg", 1))
 
         cursor.execute("""
         INSERT INTO deals (title, description, price, image, is_active)
         VALUES (?, ?, ?, ?, ?)
-        """, ("Family Meal Deal", "2 pizzas and breadsticks", 29.99, "deal-family.jpg", 1))
+        """, ("Lunch Special", "Personal pizza + drink", 8.99, "deal-lunch.jpg", 1))
+
+        cursor.execute("""
+        INSERT INTO deals (title, description, price, image, is_active)
+        VALUES (?, ?, ?, ?, ?)
+        """, ("Student Special", "Medium pizza + drink", 10.99, "deal-student.jpg", 1))
 
     conn.commit()
     conn.close()
