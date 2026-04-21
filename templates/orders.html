@@ -10,9 +10,11 @@
         {% if orders %}
             {% for order in orders %}
                 <div class="order-card">
-                    <h3>{{ order.customer_name }}</h3>
+                    <h3>{{ order.customer_name|title }}</h3>
                     <p><strong>Phone:</strong> {{ order.phone }}</p>
-                    <p><strong>Address:</strong> {{ order.address }}</p>
+                    {% if order.order_type != "carryout" %}
+                        <p><strong>Address:</strong> {{ order.address or "Not provided" }}</p>
+                    {% endif %}
                     <p><strong>Payment Method:</strong> {{ order.payment_method|title }}</p>
                     <p><strong>Order Type:</strong> {{ order.order_type|title }}</p>
                     <p><strong>Items in Order:</strong> {{ order.quantity }}</p>

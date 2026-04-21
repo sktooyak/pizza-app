@@ -10,9 +10,9 @@
 
     {% for order in orders %}
         <p>
-            {{ order.customer_name }} -
+            {{ order.customer_name.title() }} -
             {{ order.pizza_type }} -
-            {{ order.order_type }}
+            {{ order.order_type.title() }}
         </p>
     {% endfor %}
 

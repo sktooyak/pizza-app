@@ -15,7 +15,7 @@
             <p>${{ deal['price'] }}</p>
 
             <form action="{{ url_for('add_to_cart') }}" method="POST">
-                <input type="hidden" name="item_name" value="{{ deal['title'] }}">
+                <input type="hidden" name="pizza_name" value="{{ deal['title'] }}">
                 <input type="hidden" name="price" value="{{ deal['price'] }}">
                 <button type="submit">Add to Cart</button>
             </form>
